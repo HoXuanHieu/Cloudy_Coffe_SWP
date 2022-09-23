@@ -52,10 +52,16 @@ public class GetMenuForEachPage extends HttpServlet {
             end = page * 6;
             begin = end - 5;
         }
+
         ArrayList<Drink> drinkForMenu = DAOUser.getDataForMenu(begin, end, count);
         session.setAttribute("maxItems", drinkForMenu.size());
         request.setAttribute("List", drinkForMenu);
-        session.setAttribute("TotalPage", drinks.size() / 6 + 1);
+        if (drinks.size() % 6 == 0) {
+            session.setAttribute("TotalPage", drinks.size() / 6);
+        } else {
+            session.setAttribute("TotalPage", drinks.size() / 6 + 1);
+        }
+
         request.setAttribute("PageNumber", page);
         request.getRequestDispatcher("Menu.jsp").forward(request, response);
 

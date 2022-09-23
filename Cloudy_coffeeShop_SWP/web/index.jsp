@@ -89,7 +89,7 @@
         </div>
         <!-- Carousel End -->
 
-        <!-- Best Seller -->
+        <!-- Best Seller Start -->
         <div class="container-fluid py-5">
             <div class="container">
                 <div class="section-title">
@@ -140,7 +140,64 @@
                 </div>
             </div>
         </div>
-        <!-- Testimonial End -->
+        <!-- Best Seller End -->
+        
+        <!-- Menu Start -->
+         <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="section-title">
+                    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
+                    <h1 class="display-4">Competitive Pricing</h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <c:forEach var="i" begin="0" step="1" end="${maxItems/2 - 1}">
+                            <div class="row align-items-center mb-5">
+                                <div class="col-4 col-sm-3">
+                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
+                                </div>
+                                <div class="col-8 col-sm-9">
+                                    <h4>${List.get(i).getDrink_name()}</h4>
+                                    <p class="m-0">${List.get(i).getDescription()}</p>
+                                </div>
+                            </div>
+                        </c:forEach>                                        
+                    </div>
+
+                    <div class="col-lg-6">
+                        <c:forEach var="i" begin="${maxItems/2}" step="1" end="${maxItems-1}">
+                            <div class="row align-items-center mb-5">
+                                <div class="col-4 col-sm-3">
+                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
+                                </div>
+                                <div class="col-8 col-sm-9">
+                                    <h4>${List.get(i).getDrink_name()}</h4>
+                                    <p class="m-0">${List.get(i).getDescription()}</p>
+                                </div>
+                            </div>
+                        </c:forEach>                                        
+                    </div>
+                </div>
+            </div>
+
+            <!<!-- Pagination start -->
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <p class="page-link">|</p>
+                </li>
+                <c:forEach var="i" begin="1" step="1" end="${TotalPage}">  
+                    <li class="page-item"><a class="page-link" href="DataForIndexPage?PageNumber=${i}">${i}</a></li>             
+                    </c:forEach>
+                <li class="page-item disabled">
+                    <p class="page-link">|</p>
+                </li>
+            </ul>
+            <!<!-- Pagination end -->
+        </div>
+        <!-- Menu End -->
 
         <!-- Service Start -->
         <div class="container-fluid pt-5">
@@ -203,48 +260,7 @@
         </div>
         <!-- Service End -->
 
-        <!-- Menu Start -->
-        <div class="container-fluid pt-5">
-            <div class="container">
-                <div class="section-title">
-                    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
-                    <h1 class="display-4">Competitive Pricing</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <c:forEach var="i" begin="0" step="1" end="2">
-                            <div class="row align-items-center mb-5">
-                                <div class="col-4 col-sm-3">
-                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
-                                    <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
-                                </div>
-                                <div class="col-8 col-sm-9">
-                                    <h4>${List.get(i).getDrink_name()}</h4>
-                                    <p class="m-0">${List.get(i).getDescription()}</p>
-                                </div>
-                            </div>
-                        </c:forEach>                                        
-                    </div>
-                    
-                    
-                     <div class="col-lg-6">
-                        <c:forEach var="i" begin="3" step="1" end="5">
-                            <div class="row align-items-center mb-5">
-                                <div class="col-4 col-sm-3">
-                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
-                                    <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
-                                </div>
-                                <div class="col-8 col-sm-9">
-                                    <h4>${List.get(i).getDrink_name()}</h4>
-                                    <p class="m-0">${List.get(i).getDescription()}</p>
-                                </div>
-                            </div>
-                        </c:forEach>                                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Menu End -->
+        
 
 
         <!-- Reservation Start -->

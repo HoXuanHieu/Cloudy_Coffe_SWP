@@ -45,7 +45,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="index.jsp" class="nav-item nav-link">Home</a>
+                        <a href="DataForIndexPage?PageNumber=1" class="nav-item nav-link">Home</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="menu.html" class="nav-item nav-link active">Menu</a>
                         <div class="nav-item dropdown">
@@ -68,7 +68,7 @@
             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
                 <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menu</h1>
                 <div class="d-inline-flex mb-lg-5">
-                    <h5 class="m-0 text-white"><a class="text-white" href="index.jsp">Home</a></h5>
+                    <h5 class="m-0 text-white"><a class="text-white" href="DataForIndexPage?PageNumber=1">Home</a></h5>
                     <p class="m-0 text-white px-2">/</p>
                     <p class="m-0 text-white">Menu</p>
                 </div>
@@ -84,9 +84,10 @@
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
                     <h1 class="display-4">Competitive Pricing</h1>
                 </div>
+
                 <div class="row">
                     <div class="col-lg-6">
-                        <c:forEach var="i" begin="0" step="1" end="2">
+                        <c:forEach var="i" begin="0" step="1" end="${maxItems/2 - 1}">
                             <div class="row align-items-center mb-5">
                                 <div class="col-4 col-sm-3">
                                     <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
@@ -100,9 +101,8 @@
                         </c:forEach>                                        
                     </div>
 
-
                     <div class="col-lg-6">
-                        <c:forEach var="i" begin="3" step="1" end="5">
+                        <c:forEach var="i" begin="${maxItems/2}" step="1" end="${maxItems-1}">
                             <div class="row align-items-center mb-5">
                                 <div class="col-4 col-sm-3">
                                     <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
@@ -125,7 +125,7 @@
                 </li>
                 <c:forEach var="i" begin="1" step="1" end="${TotalPage}">  
                     <li class="page-item"><a class="page-link" href="GetMenuForEachPage?PageNumber=${i}">${i}</a></li>             
-                </c:forEach>
+                    </c:forEach>
                 <li class="page-item disabled">
                     <p class="page-link">|</p>
                 </li>
