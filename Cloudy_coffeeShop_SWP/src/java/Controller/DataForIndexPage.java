@@ -4,7 +4,6 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import DAO.DAOUser;
 import Model.Drink;
 import java.io.IOException;
@@ -34,8 +33,9 @@ public class DataForIndexPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        
+        //getdataFor menu=============
         ArrayList<Drink> drinks = DAOUser.getAllData();
         int numberProduct = drinks.size();
         String pageString = request.getParameter("PageNumber");
@@ -61,7 +61,16 @@ public class DataForIndexPage extends HttpServlet {
             session.setAttribute("TotalPage", drinks.size() / 6);
         } else {
             session.setAttribute("TotalPage", drinks.size() / 6 + 1);
-        }        request.setAttribute("PageNumber", page);
+        }
+        request.setAttribute("PageNumber", page);
+        //===========================
+
+        //get dataa for bestseller
+        ArrayList<Drink> bestSeller = DAOUser.getDataBestSeller();
+        request.setAttribute("BestSellerList", bestSeller);
+        //=================
+        
+        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

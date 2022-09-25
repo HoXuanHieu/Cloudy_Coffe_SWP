@@ -32,7 +32,7 @@
     <body>
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-                <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
+                <a href="DataForIndexPage?PageNumber=1" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-1 display-5 text-uppercase text-white">Cloudy Coffee</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -40,9 +40,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto p-4">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="DataForIndexPage?PageNumber=1" class="nav-item nav-link active">Home</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
-                        <a href="Menu.jsp" class="nav-item nav-link">Menu</a>
+                        <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link">Menu</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
@@ -96,54 +96,26 @@
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">BEST CHOICES</h4>
                     <h1 class="display-4">Best Seller</h1>
                 </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item">
-                        <div class="d-flex align-items-center mb-3">
-                            <img class="img-fluid" src="images/testimonial-1.jpg" alt="">
-                            <div class="ml-3">
-                                <h4>Drink1</h4>
-                                <i>Coffee</i>
+                <div class="owl-carousel testimonial-carousel">                      
+                    <c:forEach items="${BestSellerList}" var="item">
+                        <div class="testimonial-item">
+                            <div class="d-flex align-items-center mb-3">
+                                <img class="img-fluid" src="${item.getImage()}" alt="">
+                                <div class="ml-3">
+                                    <h4>${item.getDrink_name()}</h4>
+                                    <i>${item.getKind_of_Drink()}</i>
+                                </div>
                             </div>
+                            <p class="m-0">${item.getDescription()}</p>
                         </div>
-                        <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="d-flex align-items-center mb-3">
-                            <img class="img-fluid" src="images/testimonial-2.jpg" alt="">
-                            <div class="ml-3">
-                                <h4>Client Name</h4>
-                                <i>Profession</i>
-                            </div>
-                        </div>
-                        <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="d-flex align-items-center mb-3">
-                            <img class="img-fluid" src="images/testimonial-3.jpg" alt="">
-                            <div class="ml-3">
-                                <h4>Client Name</h4>
-                                <i>Profession</i>
-                            </div>
-                        </div>
-                        <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="d-flex align-items-center mb-3">
-                            <img class="img-fluid" src="images/testimonial-4.jpg" alt="">
-                            <div class="ml-3">
-                                <h4>Client Name</h4>
-                                <i>Profession</i>
-                            </div>
-                        </div>
-                        <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
         <!-- Best Seller End -->
-        
+
         <!-- Menu Start -->
-         <div class="container-fluid pt-5">
+        <div class="container-fluid pt-5">
             <div class="container">
                 <div class="section-title">
                     <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
@@ -260,7 +232,7 @@
         </div>
         <!-- Service End -->
 
-        
+
 
 
         <!-- Reservation Start -->

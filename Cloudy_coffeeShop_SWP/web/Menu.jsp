@@ -37,7 +37,7 @@
     <body>
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-                <a href="index.jsp" class="navbar-brand px-lg-4 m-0">
+                <a href="DataForIndexPage?PageNumber=1" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">Cloudy Coffee</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -47,7 +47,7 @@
                     <div class="navbar-nav ml-auto p-4">
                         <a href="DataForIndexPage?PageNumber=1" class="nav-item nav-link">Home</a>
                         <a href="service.html" class="nav-item nav-link">Service</a>
-                        <a href="menu.html" class="nav-item nav-link active">Menu</a>
+                        <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link active">Menu</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu text-capitalize">
