@@ -50,7 +50,7 @@
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="LoginPage.jsp" class="nav-item nav-link">Login</a>
                     </div>
                 </div>
             </nav>
