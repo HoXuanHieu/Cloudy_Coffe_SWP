@@ -50,6 +50,7 @@
                         <p class="loginhere">
                             Have already an account ? <a href="LoginPage.jsp" class="loginhere-link">Login here</a>
                         </p>
+                        <!--this is comment-->
                     </div>
                 </div>
             </section>
