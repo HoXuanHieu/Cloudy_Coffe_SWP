@@ -6,6 +6,7 @@ package DAO;
 
 import ConnectDB.DBConnection;
 import Model.Drink;
+import Model.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,7 +90,7 @@ public class DAOUser {
     }
 
     public static ArrayList<Drink> getDataBestSeller() {
-         ArrayList<Drink> drinks = new ArrayList<>();
+        ArrayList<Drink> drinks = new ArrayList<>();
         DBConnection db = DBConnection.getInstance();
         String sqlQuery = "Select * from Drink where drink_id = 3 or drink_id = 7 or drink_id = 10 or drink_id = 12;";
         try {
@@ -119,5 +120,30 @@ public class DAOUser {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
         }
         return drinks;
+    }
+
+    public static ArrayList<User> getDataUser() {
+        ArrayList<User> users = new ArrayList<>();
+        DBConnection db = DBConnection.getInstance();
+        String sqlQuery = "SELECT * FROM Users;";
+        try {
+            Connection connect = db.getConnection();
+            Statement statement = connect.createStatement();
+            ResultSet result = statement.executeQuery(sqlQuery);
+            while (result.next()) {
+                int user_id = result.getInt(1);
+                String name = result.getString(2);
+                String phone = result.getString(3);
+                String identity_number = result.getString(4);
+                String type = result.getString(5);
+                String address = result.getString(6);
+                String email = result.getString(7);
+
+                users.add(new User(user_id, name, phone, identity_number, type, address, email));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return users;
     }
 }

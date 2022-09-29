@@ -23,12 +23,12 @@
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
-                    <form class="login100-form validate-form">
+                    <form class="login100-form validate-form" action="Login" method="POST">
                         <span class="login100-form-title p-b-26">
                             Welcome
                         </span>
                         <span class="login100-form-title p-b-48">
-                            <h4 class="txt1         ">Cloudy Coffee</h4>
+                            <h4 class="txt1">Cloudy Coffee</h4>
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
@@ -58,7 +58,7 @@
                                 Don’t have an account?
                             </span>
 
-                            <a class="txt2" href="#">
+                            <a class="txt2" href="RegisterPage.jsp">
                                 Sign Up
                             </a>
                         </div>
