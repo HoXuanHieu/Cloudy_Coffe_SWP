@@ -8,6 +8,7 @@ import ConnectDB.DBConnection;
 import Model.Drink;
 import Model.User;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -145,5 +146,27 @@ public class DAOUser {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
         }
         return users;
+    }
+
+    public static boolean RegisterUser(User user) {
+        DBConnection db = DBConnection.getInstance();
+        String sql = "INSERT INTO Users(name, phone, identity_number, password, type, email) VALUES (?,?,?,?,?,?);";
+        try {
+            Connection connect = db.getConnection();
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getIdentity_number());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getType());
+            statement.setString(6, user.getEmail());
+            statement.execute();
+            statement.close();
+            connect.close();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 }

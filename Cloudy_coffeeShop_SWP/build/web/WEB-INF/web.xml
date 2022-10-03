@@ -20,6 +20,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Controller.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterUser</servlet-name>
+        <servlet-class>Controller.RegisterUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetMenuForEachPage</servlet-name>
         <url-pattern>/GetMenuForEachPage</url-pattern>
@@ -39,6 +43,15 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <dependency>
+        <groupId>com.paypal.sdk</groupId>
+        <artifactId>rest-api-sdk</artifactId>
+        <version>1.14.0</version>
+    </dependency>
+    <servlet-mapping>
+        <servlet-name>RegisterUser</servlet-name>
+        <url-pattern>/RegisterUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
