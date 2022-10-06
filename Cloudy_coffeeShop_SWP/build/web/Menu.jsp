@@ -35,6 +35,8 @@
         <link href="css/style.min.css" rel="stylesheet">
     </head>
     <body>
+        <!-- Navbar Start -->
+
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="DataForIndexPage?PageNumber=1" class="navbar-brand px-lg-4 m-0">

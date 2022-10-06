@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,17 +22,18 @@
             <section class="signup">
                 <div class="container">
                     <div class="signup-content">
-                        <form method="POST" action="" class="signup-form">
+                        <form method="POST" action="RegisterUser" class="signup-form">
                             <h2 class="form-title">Create account</h2>
-
+                            
+                            <c:if test="${not empty messageError}">
+                                <h4 style="color: red; padding: auto">${messageError}</h4>                   
+                            </c:if> 
+                                
                             <div class="form-group">
                                 <input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required/>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-input" name="phone" id="name" pattern="(\+84|0)\d{9,10}" placeholder="Your Phone" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-input" name="identity" id="" placeholder="Your Identity Number"/>
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" required/>
@@ -47,18 +50,11 @@
                                 <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
                             </div>
                         </form>
-                        <c:if test="${not empty message}">
-                            <h6>Cám ơn bạn đã đăng ký, click vào <a href="LoginPage.jsp">đây</a> đề đăng nhập</h6>                   
-                        </c:if>
-                        <c:if test="${not empty messageError}">
-                            <h6 style="color: red">${messageError}</h6>                   
-                        </c:if>
+
+
                         <p class="loginhere">
                             Have already an account ? <a href="LoginPage.jsp" class="loginhere-link">Login here</a>
-                        </p>
-                        <!--this is comment-->
-
-                        <!--test pull github-->
+                        </p>                     
                     </div>
                 </div>
             </section>

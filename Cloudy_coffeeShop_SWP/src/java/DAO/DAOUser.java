@@ -135,12 +135,10 @@ public class DAOUser {
                 int user_id = result.getInt(1);
                 String name = result.getString(2);
                 String phone = result.getString(3);
-                String identity_number = result.getString(4);
+                String password = result.getString(4);
                 String type = result.getString(5);
-                String address = result.getString(6);
-                String email = result.getString(7);
-
-                users.add(new User(user_id, name, phone, identity_number, type, address, email));
+                String email = result.getString(6);
+                users.add(new User(user_id, name, phone, password, type, email));
             }
         } catch (SQLException e) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
@@ -150,16 +148,15 @@ public class DAOUser {
 
     public static boolean RegisterUser(User user) {
         DBConnection db = DBConnection.getInstance();
-        String sql = "INSERT INTO Users(name, phone, identity_number, password, type, email) VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO Users VALUES (?,?,?,?,?);";
         try {
             Connection connect = db.getConnection();
             PreparedStatement statement = connect.prepareStatement(sql);
             statement.setString(1, user.getName());
             statement.setString(2, user.getPhone());
-            statement.setString(3, user.getIdentity_number());
-            statement.setString(4, user.getPassword());
-            statement.setString(5, user.getType());
-            statement.setString(6, user.getEmail());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getType());
+            statement.setString(5, user.getEmail());
             statement.execute();
             statement.close();
             connect.close();

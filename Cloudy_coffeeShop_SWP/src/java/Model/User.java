@@ -1,4 +1,4 @@
- package Model;
+  package Model;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,7 +14,6 @@ public class User {
     private int user_id;
     private String name;
     private String phone;
-    private String identity_number;
     private String password;
     private String type;
     private String email;
@@ -22,11 +21,10 @@ public class User {
     public User() {
     }
 
-    public User(int user_id, String name, String phone, String identity_number, String password, String type, String email) {
+    public User(int user_id, String name, String phone, String password, String type, String email) {
         this.user_id = user_id;
         this.name = name;
         this.phone = phone;
-        this.identity_number = identity_number;
         this.password = password;
         this.type = type;
         this.email = email;
@@ -62,14 +60,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getIdentity_number() {
-        return identity_number;
-    }
-
-    public void setIdentity_number(String identity_number) {
-        this.identity_number = identity_number;
     }
 
     public String getPassword() {

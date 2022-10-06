@@ -55,7 +55,7 @@
                             <a href="LoginPage.jsp" class="nav-item nav-link">Login</a>
                         </c:if>
                         <c:if test="${not empty Name}">
-                            <a href="LoginPage.jsp" class="nav-item nav-link">Your Order</a>
+                            <a href="" class="nav-item nav-link">Your Order</a>
                             <a href="Logout" class="nav-item nav-link">Logout</a>
                         </c:if>
                     </div>
