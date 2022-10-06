@@ -1,0 +1,68 @@
+CREATE TABLE Users(
+	userId int IDENTITY(1,1) primary key ,
+	FullName nvarchar(255) not null,
+	phone nvarchar(255) not null unique,
+	User_Password nvarchar(255) not null,
+	User_Type nvarchar(255) not null,
+	email nvarchar(255) not null unique,
+);
+CREATE TABLE Drink(
+	drink_id int IDENTITY(1,1) primary key,
+	drink_name nvarchar(255) not null unique,
+	price FLOAT not null,
+	kind_of_drink nvarchar(255) not null,
+	ingredient nvarchar(255) not null,
+	decription nvarchar(255) not null,
+	images nvarchar(255),
+);
+CREATE TABLE Carts(
+	cart_id int IDENTITY(1,1) primary key,
+	userId int FOREIGN KEY REFERENCES Users(userId),
+	drink_id int FOREIGN KEY REFERENCES Drink(drink_id),
+	amount int not null,
+	User_address nvarchar(255),
+	checkout bit not null
+);
+CREATE TABLE Tables(
+	table_id int IDENTITY(1,1) primary key,
+	table_location nvarchar(255) not null,
+	price FLOAT not null,
+	check_Available bit not null,
+);
+
+CREATE TABLE Table_Order(
+	table_order_id int IDENTITY(1,1) primary key,
+	userId int FOREIGN KEY REFERENCES Users(userId), 
+	table_id int FOREIGN KEY REFERENCES Tables(table_id),
+	timeOrder datetime not null,
+	price FLOAT not null,
+);
+
+insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Hot Coffee', 1,'Coffee','Coffee','Coffee is a drink prepared from roasted coffee beans made from seeds of Coffea plant species. It is darkly colored, bitter, slightly acidic, and has a stimulating effect on humans.','https://thumbs.dreamstime.com/b/cup-steamy-coffee-smoke-coffee-beans-hot-coffee-black-background-cup-steamy-coffee-smoke-coffee-beans-157461627.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Iced Coffee', 1,'Coffee','Coffee','Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee normally.','https://bizweb.dktcdn.net/100/004/714/articles/ca-phe-da.png?v=1586258829727');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Milk Coffee', 1,'Coffee','Coffee,Condensed milk','Vietnamese cà phê sữa đá or "iced milk coffee", is made with a dark roast, often with chicory, brewed with a small metal Vietnamese drip filter into a cup containing sweetened condensed milk.','https://f5cafe.com/wp-content/uploads/2020/06/ca_phe_sua_da-600x600.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Americano', 1,'Coffee','Coffee,Condensed milk','Americano is a type of coffee drink prepared by diluting an espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.','https://thelibrarycoffee.com/wp-content/uploads/2020/05/IcedAmericano-0261.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Espresso', 1,'Coffee','Coffee,Condensed milk','Espresso is generally thicker than coffee brewed by other methods, with a viscosity similar to that of warm honey.','https://cdn.tgdd.vn/Files/2020/04/08/1247674/ca-phe-espresso-cappuccino-hay-macchiato-khac-nhau-nhu-the-nao-202004081936305660.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Cappucino', 1,'Coffee','Coffee,Cream milk','A cappuccino is an espresso-based coffee drink that originated in Italy and is prepared with steamed milk foam','https://tse1.mm.bing.net/th?id=OIP.8YRmWsFOsmvH2fzfNFEG7gHaEK&pid=Api&P=0');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Macchiato ', 1,'Coffee','Coffee,Cream milk','Macchiato is an espresso coffee drink with a small amount of milk, usually foamed','https://topicimages.mrowl.com/large/prithvi_c/coffee/typesofcoffee/caff_macchiato_1.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Thai Green Tea Milk Tea', 1,'Milk Tea','Thai Matcha Tea,Black Pearl,Milk','Thai Red / Thai Green Milk Tea is a typical Thai tea made by adding special milk tea and ice.','https://minhducgreen.com/wp-content/uploads/2019/10/cong-thuc-pha-che-tra-sua-thai-xanh-2.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Ice-Blended Chocolate', 1,'Ice Blended','Chocolate,Cream Cheese,Ice','Chocolate ice blended is a blend of fresh milk, sweet condensed milk, bitter chocolate and pureed with ice. The top is covered with a layer of greasy cream cheese','https://thumbs.dreamstime.com/b/ice-blended-chocolate-table-26492973.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Peach Orange Lemongrass Tea', 1,'Tea','Peach Tea,Orange,Milk','Peach orange lemongrass tea with the cool sweetness of peaches, the mild sour taste of oranges and the strong aroma of lemongrass is the ideal drink for hot days.','https://cdn.tgdd.vn/2020/07/CookRecipe/GalleryStep/thanh-pham-273.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Black Tea', 1,'Tea','Black Tea','Black tea, also translated to red tea in various East Asian languages, is a type of tea that is more oxidized than oolong, yellow, white and green teas. Black tea is generally stronger in flavour than other teas.','https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/292/292160/a-cup-of-black-tea.jpg?w=1155&h=1734');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Ice-Blended Coconut Chocolate', 1,'Ice Blended','Chocolate,Coconut Milk,Ice','Ice-blend coconut chocolate is also the enhancement of ice-blend chocolate with the combination of greasy coconut milk','https://cbtl-images.s3.us-west-1.amazonaws.com/Production/Drupal/s3fs-public/styles/cafe_menu_item/public/cafe-menu/18WIN_ChocoCoconut_IB_2880x2532px.jpg?itok=SKC8BO_k');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Straw berry', 1,'Smoothie','Strawberry,Milk,Yourt','Strawberry smoothie with ingredients: fresh strawberries are pureed, combined with yogurt and pureed','https://www.kosher.com/resized/open_graph/s/t/strawberry_smoothie_shutterstock.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Blue berry', 1,'Smoothie','Blueberry,Milk,Yourt','Blueberry smoothie with ingredients: fresh blueberries are pureed, combined with yogurt and pureed','https://i1.wp.com/gratefulgrazer.com/wp-content/uploads/2017/01/2017-01-24-Wild-Blueberry-Beet-Smoothie-Sponsored-Contest-Wild-Blueberries-8-of-9.jpg?resize=2298%2C3447');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Watermelon', 1,'Juice','Watermelon,Ice','Use fresh seedless watermelon slices to squeeze out 100% pure watermelon juice','https://bepantamduc.vn/uploads/san-pham/2020_05/nuoc-ep-dua-hau.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Orange', 1,'Juice','Orange,Ice','Use fresh, juicy oranges full of sweetness','https://i0.wp.com/muabanhtrangtron.com/wp-content/uploads/2020/12/cam-ep.jpg?fit=600%2C600&ssl=1');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Avocado', 1,'Smoothie','Avocado,Milk,Yourt','The mixture of fresh butter with fresh milk, pureed yogurt creates a feeling of coolness, both fat and sweet.','https://bepantamduc.vn/uploads/san-pham/2020_05/sinh-to-bo-bepantamduc.vn.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Pink Guava Tea', 1,'Tea','Pink GuavaJam,Green Tea','Pink guava tea is a fruit tea with a characteristic pink color from mixing pink guava jam with natural green tea.','https://cdn.dayphache.edu.vn/wp-content/uploads/2021/03/tra-oi-hong-dau-tay.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Black Sugar Pearl Fresh Milk', 1,'Milk','Milk,Pearl','Black sugar pearl fresh milk is a new drink. This drink is the perfect combination of unsweetened fresh milk and black sugar pearls. The gentle cool taste of fresh milk mixed with supple, sweet pearls has created an undeniable attraction of this drink.','https://cotrangquan.com/wp-content/uploads/2021/02/foody-upload-api-foody-mobile-2-190129090407.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Strawberry Soda', 1,'Soda','Soda,Strawberry,Lemon','A sweet strawberry drink containing carbonated water and flavoring.','https://namas.vn/wp-content/uploads/2021/12/cach-lam-soda-ngon-tai-nha-4.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Kiwi Soda', 1,'Soda','Soda,Kiwi,Lemon','A sweet Kiwi drink containing carbonated water and flavoring.','https://imgamp.phunutoday.vn/files/news/2017/08/03/huong-dan-cach-pha-che-soda-kiwi-145307.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Lychee Soda', 1,'Soda','Soda,Strawberry,Lemon','A sweet Lychee drink containing carbonated water and flavoring.','https://blog.wikilady.vn/wp-content/uploads/2019/04/soda-vai-mat-lanh.jpg');
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Blueberry Soda', 1,'Soda','Soda,Strawberry,Lemon','A sweet Blueberry drink containing carbonated water and flavoring.','https://media.istockphoto.com/photos/colorful-blueberry-cocktail-picture-id1251088123?k=20&m=1251088123&s=612x612&w=0&h=adWrzKgrZYS9o1iK7QwmgfH_sR8TEHASE_qsNHIBXUc=');	
+  insert into Users values('User1', '0123456789', '123456', 'user', 'abc123@gmail.com')	
+
+select top 6 * from (select ROW_NUMBER() OVER(order by drink_id) as IndexNo, * from (Select distinct * from Drink) as TempA) as TempB Where IndexNo Between 1 and 6
+
+  
