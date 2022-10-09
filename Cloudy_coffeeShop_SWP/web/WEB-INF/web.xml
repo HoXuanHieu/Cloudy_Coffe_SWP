@@ -28,6 +28,10 @@
         <servlet-name>DrinkPage</servlet-name>
         <servlet-class>Controller.DrinkPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetDrinkForBuyPage</servlet-name>
+        <servlet-class>Controller.GetDrinkForBuyPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetMenuForEachPage</servlet-name>
         <url-pattern>/GetMenuForEachPage</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>DrinkPage</servlet-name>
         <url-pattern>/DrinkPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDrinkForBuyPage</servlet-name>
+        <url-pattern>/GetDrinkForBuyPage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
