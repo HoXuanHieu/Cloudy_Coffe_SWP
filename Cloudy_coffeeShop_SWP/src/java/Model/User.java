@@ -1,16 +1,15 @@
-  package Model;
+package Model;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Ho Hieu
  */
 public class User {
-    //user_id int, name String, phone String, identity_number String,password String,type String
+
     private int user_id;
     private String name;
     private String phone;
@@ -37,7 +36,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public int getUser_id() {
         return user_id;
     }

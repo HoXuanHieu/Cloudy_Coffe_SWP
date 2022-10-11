@@ -12,12 +12,12 @@ import java.sql.SQLException;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Ho Hieu
  */
-public class DBConnection implements DBinfor{
+public class DBConnection implements DBinfor {
+
     private static DBConnection instance;
 
     public DBConnection() {

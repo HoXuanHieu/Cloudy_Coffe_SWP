@@ -32,6 +32,14 @@
         <servlet-name>GetDrinkForBuyPage</servlet-name>
         <servlet-class>Controller.GetDrinkForBuyPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCart</servlet-name>
+        <servlet-class>Controller.AddCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveCart</servlet-name>
+        <servlet-class>Controller.RemoveCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetMenuForEachPage</servlet-name>
         <url-pattern>/GetMenuForEachPage</url-pattern>
@@ -69,12 +77,20 @@
         <servlet-name>GetDrinkForBuyPage</servlet-name>
         <url-pattern>/GetDrinkForBuyPage</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCart</servlet-name>
+        <url-pattern>/AddCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveCart</servlet-name>
+        <url-pattern>/RemoveCart</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>DataForIndexPage</welcome-file>
+        <welcome-file>Login</welcome-file>
     </welcome-file-list>
 </web-app>

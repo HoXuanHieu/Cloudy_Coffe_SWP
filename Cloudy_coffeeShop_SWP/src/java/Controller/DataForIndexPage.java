@@ -64,13 +64,11 @@ public class DataForIndexPage extends HttpServlet {
         }
         request.setAttribute("PageNumber", page);
         //===========================
-
+        
         //get dataa for bestseller
         ArrayList<Drink> bestSeller = DAOUser.getDataBestSeller();
         request.setAttribute("BestSellerList", bestSeller);
         //=================
-        
-        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

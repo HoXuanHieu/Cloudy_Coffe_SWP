@@ -34,7 +34,7 @@
         <link href="css/style.min.css" rel="stylesheet">
     </head>
     <body>
-         <div class="container-fluid p-0 nav-bar">
+        <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="DataForIndexPage?PageNumber=1" class="navbar-brand px-lg-4 m-0">
                     <h1 class="m-0 display-4 text-uppercase text-white">Cloudy Coffee</h1>
@@ -70,7 +70,7 @@
                 <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Drink Name</h1>                
             </div>
         </div>
-          <div>
+        <div>
             <section class="py-5">
                 <div class="container px-4 px-lg-5 my-5">
                     <div class="row gx-4 gx-lg-5 align-items-center">
@@ -89,26 +89,24 @@
                             </c:forEach>
                             <br>
                             <hr>            
-                                <c:if test="${not empty Name}">
-                                    <div class="d-flex">
-                                        <form action="addCart">
-                                            <input type="hidden" name="bookId" value="${Drink.getDrink_id()}">                                        
-                                     
-                                            <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
-                                            <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
-                                        </form>
-                                    </div>
-                                </c:if>
-                                <c:if test="${empty Name}">
-                                    <div class="d-flex">
-                                        <form action="Login">
-                                            <input type="hidden" name="bookId" value="${Book.getBookId()}">                                        
-                                            <input type="hidden" name="PageNumber"  value="${param.PageNumber}">
-                                            <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
-                                            <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
-                                        </form>
-                                    </div>
-                                </c:if>                           
+                            <c:if test="${not empty Name}">
+                                <div class="d-flex">
+                                    <form action="AddCart" method="POST">
+                                        <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
+                                        <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
+                                        <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
+                                    </form>
+                                </div>
+                            </c:if>
+                            <c:if test="${empty Name}">
+                                <div class="d-flex">
+                                    <form action="LoginPage.jsp">
+                                        <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
+                                        <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
+                                        <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
+                                    </form>
+                                </div>
+                            </c:if>                           
                         </div>
                     </div>
                 </div>

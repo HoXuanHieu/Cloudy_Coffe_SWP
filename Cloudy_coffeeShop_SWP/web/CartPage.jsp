@@ -1,7 +1,7 @@
 <%-- 
-    Document   : DrinkPage
-    Created on : Oct 6, 2022, 9:16:37 PM
-    Author     : Ho Hieu
+    Document   : CartPage
+    Created on : Oct 10, 2022, 1:06:40 PM
+    Author     : Asus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cloudy Coffee / Drink Page </title>
+        <title>Cloudy Coffee / Cart Page </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free Website Template" name="keywords">
         <meta content="Free Website Template" name="description">
@@ -32,6 +32,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.min.css" rel="stylesheet">
+        <link href="css/cssForCart.css" rel="stylesheet"> 
     </head>
     <body>
         <div class="container-fluid p-0 nav-bar">
@@ -65,52 +66,65 @@
                 </div>
             </nav>
         </div>
+
         <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
             <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Drink Name</h1>                
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Your Cart</h1>                
             </div>
         </div>
-        <div>
-            <section class="py-5">
-                <div class="container px-4 px-lg-5 my-5">
-                    <div class="row gx-4 gx-lg-5 align-items-center">
-                        <div class="col-md-4 "><img class="card-img-top img-fluid mb-5 mb-md-0" src="${Drink.getImage()}" alt="..." /></div>
-                        <div class="col-md-6">                            
-                            <h1 class="display-5 fw-bolder">${Drink.getDrink_name()}</h1>
-                            <div class="fs-5 mb-5">                           
-                                <span>${Drink.getPrice()} $</span>
+        <form action="">
+            <div style="margin-bottom: 50px;" class="card">
+                <div class="row">
+                    <div class="col-md-8 cart">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col"><h4><b>SHOPPING CART</b></h4></div>
+                                <div class="col align-self-center text-right text-muted"></div>
                             </div>
-                            <p class="lead">${Drink.getDescription()}</p>
-                            <p>Tác giả: ${Book.getAuthorID()}</p>
-                            <p>Danh Mục: <a class="" href="SearchForGenre?genre=${Drink.getKind_of_Drink()}">${Drink.getKind_of_Drink()}</a> </p>
-                            thể loại:
-                            <c:forEach var="i" items="${Drink.getIngredient()}">
-                                <a class="" href="SearchForCategory?category=${i}">${i}</a>,
-                            </c:forEach>
-                            <br>
-                            <hr>            
-                            <c:if test="${not empty Name}">
-                                <div class="d-flex">
-                                    <form action="AddCart" method="POST">
-                                        <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
-                                        <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
-                                        <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
-                                    </form>
-                                </div>
-                            </c:if>
-                            <c:if test="${empty Name}">
-                                <div class="d-flex">
-                                    <form action="LoginPage.jsp">
-                                        <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
-                                        <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
-                                        <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
-                                    </form>
-                                </div>
-                            </c:if>                           
                         </div>
+                        <c:set var="id" value="${sessionScope.userId}"/>
+                        <jsp:useBean id="DAOCart" class="DAO.DAOCart"/>
+                        <c:forEach var="i" items="${DAOCart.getCart(id)}">
+                            <c:set var="drinkId" value="${i.getDrink_id()}"/>
+                            <c:set var="drink" value="${DAOCart.getDrink(drinkId)}"/>
+                            <div class="row border-top border-bottom">
+                                <div class="row main align-items-center">
+                                    <div class="col-2"><img class="img-fluid" src="${drink.getImage()}"></div>
+                                    <div class="col">
+                                        <div class="row text-muted">${drink.getDrink_name()}</div>
+                                        <div class="row">${drink.getKind_of_Drink()}</div>
+                                    </div>
+                                    <div class="col">
+                                        <!--<a href="#">-</a><a href="#">+</a>-->
+                                        <a href="#" class="border">${i.getAmount()}</a>
+                                    </div>
+                                    <c:set var="cartId" value="${i.getCart_id()}"/>
+                                    <div class="col">&dollar; ${drink.getPrice() * i.getAmount()} <a href="RemoveCart?cart_id=${cartId}"><span class="close">&#10005;</span></a></div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div class="back-to-shop"><a href="#"><button>&leftarrow;</a><span class="text-muted">Back to shop</span></button></div>
+                    </div>
+
+                    <div class="col-md-4 summary">
+                        <div><h5><b>Summary</b></h5></div>
+                        <hr>
+                        <div style="margin-bottom: 10px;" class="row">
+                            <div class="col" style="padding-left:0;">ITEMS PRICE</div>
+                            <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
+                        </div>
+                        <p>SHIPPING</p>
+                        <select><option class="text-muted">Standard-Delivery- &dollar;5.00</option></select>
+                        <p>YOUR ADDRESS</p>
+                        <input id="code" name="address" placeholder="Enter your code">
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id) + 5}</div>
+                        </div>
+                        <button style="margin-top: 10px;" class="btn" type="submit">CHECKOUT</button>
                     </div>
                 </div>
-            </section> 
-        </div>
+            </div>
+        </form>
     </body>
 </html>

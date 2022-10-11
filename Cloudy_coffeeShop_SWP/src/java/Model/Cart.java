@@ -2,31 +2,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;    
+package Model;
 
 /**
  *
  * @author Ho Hieu
  */
 public class Cart {
-    //cart_id int, user_id int, drink_id int, amount int, address string, check_out boolean
+
     private int cart_id;
     private int user_id;
     private int drink_id;
     private int amount;
     private String address;
     private boolean check_out;
-    
-    public Cart() {
+    private String date_check_out;
+
+    public Cart(int user_id, int drink_id, int amount, boolean check_out) {
+        this.user_id = user_id;
+        this.drink_id = drink_id;
+        this.amount = amount;
+        this.check_out = check_out;
     }
 
-    public Cart(int cart_id, int user_id, int drink_id, int amount, String address, boolean check_out) {
+    public Cart(int cart_id, int user_id, int drink_id, int amount, boolean check_out) {
+        this.cart_id = cart_id;
+        this.user_id = user_id;
+        this.drink_id = drink_id;
+        this.amount = amount;
+        this.check_out = check_out;
+    }
+
+    public Cart(int user_id, int drink_id, int amount, String address, boolean check_out, String date_check_out) {
+        this.user_id = user_id;
+        this.drink_id = drink_id;
+        this.amount = amount;
+        this.address = address;
+        this.check_out = check_out;
+        this.date_check_out = date_check_out;
+    }
+
+    public Cart(int cart_id, int user_id, int drink_id, int amount, String address, boolean check_out, String date_check_out) {
         this.cart_id = cart_id;
         this.user_id = user_id;
         this.drink_id = drink_id;
         this.amount = amount;
         this.address = address;
         this.check_out = check_out;
+        this.date_check_out = date_check_out;
     }
 
     public int getCart_id() {
@@ -76,5 +99,13 @@ public class Cart {
     public void setCheck_out(boolean check_out) {
         this.check_out = check_out;
     }
-    
+
+    public String getDate_check_out() {
+        return date_check_out;
+    }
+
+    public void setDate_check_out(String date_check_out) {
+        this.date_check_out = date_check_out;
+    }
+
 }

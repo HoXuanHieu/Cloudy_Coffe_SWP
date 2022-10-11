@@ -1,12 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ *  To change this license header, choose License Headers in Project Properties.
+ *  To change this template file, choose Tools | Templates
+ *  and open the template in the editor.
  */
 package Controller;
 
 import DAO.DAOCart;
-import DAO.DAOUser;
-import Model.Drink;
+import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Ho Hieu
+ * @author Asus
  */
-public class GetMenuForEachPage extends HttpServlet {
+public class RemoveCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,46 +34,18 @@ public class GetMenuForEachPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        
-        //getdataFor menu=============
-        ArrayList<Drink> drinks = DAOUser.getAllData();
-        int numberProduct = drinks.size();
-        String pageString = request.getParameter("PageNumber");
-        int page;
-        if (pageString == null) {
-            page = 1;
-        } else {
-            page = Integer.parseInt(pageString);
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RemoveCart</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RemoveCart at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        int end = 1, begin = 1, count = 6;;
-        if ((int) (numberProduct / 6 + 1) == page) {
-            end = numberProduct;
-            begin = numberProduct - (numberProduct - (page - 1) * 6);
-            count = numberProduct - (page - 1) * 6;
-        } else {
-            end = page * 6;
-            begin = end - 5;
-        }
-
-        ArrayList<Drink> drinkForMenu = DAOUser.getDataForMenu(begin, end, count);
-        session.setAttribute("maxItems", drinkForMenu.size());
-        request.setAttribute("List", drinkForMenu);
-        if (drinks.size() % 6 == 0) {
-            session.setAttribute("TotalPage", drinks.size() / 6);
-        } else {
-            session.setAttribute("TotalPage", drinks.size() / 6 + 1);
-        }
-        request.setAttribute("PageNumber", page);
-        //=================
-        
-        //get cart==========
-        if (session.getAttribute("carts") != null) {
-            session.setAttribute("carts", DAOCart.getCart((int) session.getAttribute("user_id")));
-        }
-        //==========
-        
-        request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,7 +60,10 @@ public class GetMenuForEachPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        int cart_id = Integer.parseInt(request.getParameter("cart_id"));
+        DAOCart.removeCart(cart_id);
+        request.getRequestDispatcher("CartPage.jsp").include(request, response);
     }
 
     /**
