@@ -45,10 +45,11 @@
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link">Menu</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu text-capitalize">
-                                <a href="reservation.html" class="dropdown-item">Reservation</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Find Drink</a>
+                           <div class="dropdown-menu text-capitalize">
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Coffee" class="dropdown-item">Coffee</a>                         
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Tea" class="dropdown-item">Tea</a>
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Smoothie" class="dropdown-item">Smoothie</a>
                             </div>
                         </div>
                         <c:if test="${empty Name}">

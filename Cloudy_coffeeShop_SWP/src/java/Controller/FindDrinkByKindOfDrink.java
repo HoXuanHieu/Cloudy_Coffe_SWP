@@ -5,7 +5,7 @@
 package Controller;
 
 import DAO.DAOCart;
-import DAO.DAOUser;
+import DAO.DAODrink;
 import Model.Drink;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ho Hieu
  */
-public class GetMenuForEachPage extends HttpServlet {
+public class FindDrinkByKindOfDrink extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +33,12 @@ public class GetMenuForEachPage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-
-        //getdataFor menu=============
-        ArrayList<Drink> drinks = DAOUser.getAllData();
+        String s = request.getParameter("find");
+        ArrayList<Drink> drinks = DAODrink.GetAllDrinkByKindOfDrink(s);
         int numberProduct = drinks.size();
         String pageString = request.getParameter("PageNumber");
+
         int page;
         if (pageString == null) {
             page = 1;
@@ -49,14 +48,14 @@ public class GetMenuForEachPage extends HttpServlet {
         int end = 1, begin = 1, count = 6;
         if ((int) (numberProduct / 6 + 1) == page) {
             end = numberProduct;
-            begin = numberProduct - (numberProduct - (page - 1) * 6) +1;
+            begin = numberProduct - (numberProduct - (page - 1) * 6) + 1;
             count = numberProduct - (page - 1) * 6;
         } else {
             end = page * 6;
             begin = end - 5;
         }
 
-        ArrayList<Drink> drinkForMenu = DAOUser.getDataForMenu(begin, end, count);
+        ArrayList<Drink> drinkForMenu = DAODrink.GetDrinkForKindOfDrink(begin, end, count, s);
         session.setAttribute("maxItems", drinkForMenu.size());
         request.setAttribute("List", drinkForMenu);
         if (drinks.size() % 6 == 0) {
@@ -71,12 +70,12 @@ public class GetMenuForEachPage extends HttpServlet {
         if (session.getAttribute("carts") != null) {
             session.setAttribute("carts", DAOCart.getCart((int) session.getAttribute("user_id")));
         }
+        request.setAttribute("Kind", s);
+        request.getRequestDispatcher("SearchForKindOfDrink.jsp").forward(request, response);
 
-        //==========
-        request.getRequestDispatcher("Menu.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

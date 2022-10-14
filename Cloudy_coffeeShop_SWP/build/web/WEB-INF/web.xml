@@ -40,6 +40,14 @@
         <servlet-name>RemoveCart</servlet-name>
         <servlet-class>Controller.RemoveCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FindDrinkByIngredient</servlet-name>
+        <servlet-class>Controller.FindDrinkByIngredient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindDrinkByKindOfDrink</servlet-name>
+        <servlet-class>Controller.FindDrinkByKindOfDrink</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetMenuForEachPage</servlet-name>
         <url-pattern>/GetMenuForEachPage</url-pattern>
@@ -84,6 +92,14 @@
     <servlet-mapping>
         <servlet-name>RemoveCart</servlet-name>
         <url-pattern>/RemoveCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindDrinkByIngredient</servlet-name>
+        <url-pattern>/FindDrinkByIngredient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindDrinkByKindOfDrink</servlet-name>
+        <url-pattern>/FindDrinkByKindOfDrink</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,21 +22,28 @@
                             <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>${List.get(i).getDrink_name()}</h4>
+                            <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                <h4>${List.get(i).getDrink_name()}</h4>
+                            </a>
                             <p class="m-0">${List.get(i).getDescription()}</p>
                         </div>
                     </div>
                 </c:forEach>                                        
             </div>
+                        
             <div class="col-lg-6">
                 <c:forEach var="i" begin="${maxItems/2}" step="1" end="${maxItems-1}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                            <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                            </a> 
                             <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>${List.get(i).getDrink_name()}</h4>
+                            <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                <h4>${List.get(i).getDrink_name()}</h4>
+                            </a>
                             <p class="m-0">${List.get(i).getDescription()}</p>
                         </div>
                     </div>

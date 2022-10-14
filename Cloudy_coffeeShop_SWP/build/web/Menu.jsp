@@ -51,10 +51,11 @@
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link active">Menu</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu text-capitalize">
-                                <a href="reservation.html" class="dropdown-item">Reservation</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Find Drink</a>
+                             <div class="dropdown-menu text-capitalize">
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Coffee" class="dropdown-item">Coffee</a>                         
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Tea" class="dropdown-item">Tea</a>
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Smoothie" class="dropdown-item">Smoothie</a>
                             </div>
                         </div>
                         <c:if test="${empty Name}">
@@ -98,11 +99,15 @@
                         <c:forEach var="i" begin="0" step="1" end="${maxItems/2 - 1}">
                             <div class="row align-items-center mb-5">
                                 <div class="col-4 col-sm-3">
-                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    </a> 
                                     <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
                                 </div>
                                 <div class="col-8 col-sm-9">
-                                    <h4>${List.get(i).getDrink_name()}</h4>
+                                    <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                        <h4>${List.get(i).getDrink_name()}</h4>
+                                    </a>
                                     <p class="m-0">${List.get(i).getDescription()}</p>
                                 </div>
                             </div>
@@ -113,11 +118,15 @@
                         <c:forEach var="i" begin="${maxItems/2}" step="1" end="${maxItems-1}">
                             <div class="row align-items-center mb-5">
                                 <div class="col-4 col-sm-3">
-                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${List.get(i).getImage()}" alt="">
+                                    </a> 
                                     <h5 class="menu-price">$${List.get(i).getPrice()}</h5>
                                 </div>
                                 <div class="col-8 col-sm-9">
-                                    <h4>${List.get(i).getDrink_name()}</h4>
+                                    <a href="GetDrinkForBuyPage?drinkid=${List.get(i).getDrink_id()}">
+                                        <h4>${List.get(i).getDrink_name()}</h4>
+                                    </a>
                                     <p class="m-0">${List.get(i).getDescription()}</p>
                                 </div>
                             </div>

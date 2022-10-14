@@ -48,10 +48,11 @@
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link active">Menu</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Find Drink</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="reservation.html" class="dropdown-item">Reservation</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Coffee" class="dropdown-item">Coffee</a>                         
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Tea" class="dropdown-item">Tea</a>
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Smoothie" class="dropdown-item">Smoothie</a>
                             </div>
                         </div>
                         <c:if test="${empty Name}">
@@ -78,14 +79,13 @@
                         <div class="col-md-6">                            
                             <h1 class="display-5 fw-bolder">${Drink.getDrink_name()}</h1>
                             <div class="fs-5 mb-5">                           
-                                <span>${Drink.getPrice()} $</span>
+                                Price: <span>${Drink.getPrice()} $</span>
                             </div>
                             <p class="lead">${Drink.getDescription()}</p>
-                            <p>Tác giả: ${Book.getAuthorID()}</p>
-                            <p>Danh Mục: <a class="" href="SearchForGenre?genre=${Drink.getKind_of_Drink()}">${Drink.getKind_of_Drink()}</a> </p>
-                            thể loại:
+                            <p>Kind of drink: <a class="" href="FindDrinkByKindOfDrink?PageNumber=1&find=${Drink.getKind_of_Drink()}">${Drink.getKind_of_Drink()}</a> </p>
+                            Ingredient:
                             <c:forEach var="i" items="${Drink.getIngredient()}">
-                                <a class="" href="SearchForCategory?category=${i}">${i}</a>,
+                                <a class="" href="FindDrinkByIngredient?PageNumber=1&find=${i}">${i}</a>,
                             </c:forEach>
                             <br>
                             <hr>            
@@ -94,6 +94,8 @@
                                     <form action="AddCart" method="POST">
                                         <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
                                         <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
+                                        <br>
+
                                         <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
                                     </form>
                                 </div>
@@ -103,6 +105,7 @@
                                     <form action="LoginPage.jsp">
                                         <input type="hidden" name="drinkId" value="${Drink.getDrink_id()}">
                                         <input class="form-control text-center me-3" id="inputQuantity" type="num" name="amount" value="1" style="max-width: 3rem" />
+                                        <br>
                                         <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">                                      
                                     </form>
                                 </div>
@@ -112,5 +115,20 @@
                 </div>
             </section> 
         </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
     </body>
 </html>

@@ -61,8 +61,12 @@ insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, ima
   insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Kiwi Soda', 1,'Soda','Soda,Kiwi,Lemon','A sweet Kiwi drink containing carbonated water and flavoring.','https://imgamp.phunutoday.vn/files/news/2017/08/03/huong-dan-cach-pha-che-soda-kiwi-145307.jpg');
   insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Lychee Soda', 1,'Soda','Soda,Strawberry,Lemon','A sweet Lychee drink containing carbonated water and flavoring.','https://blog.wikilady.vn/wp-content/uploads/2019/04/soda-vai-mat-lanh.jpg');
   insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Blueberry Soda', 1,'Soda','Soda,Strawberry,Lemon','A sweet Blueberry drink containing carbonated water and flavoring.','https://media.istockphoto.com/photos/colorful-blueberry-cocktail-picture-id1251088123?k=20&m=1251088123&s=612x612&w=0&h=adWrzKgrZYS9o1iK7QwmgfH_sR8TEHASE_qsNHIBXUc=');	
-  insert into Users values('User1', '0123456789', '123456', 'user', 'abc123@gmail.com')	
+  insert into Drink (drink_name, price, kind_of_drink, ingredient, decription, images) values ('Cafe Latte','1','Coffee','Coffee,Milk','A latte or caffè latte is a milk coffee that boasts a silky layer of foam as a real highlight to the drink.','https://www.hoteljob.vn/files/Anh-HTJ-Hong/phan-biet-8-loai-thuc-uong-ca-phe-hot-nhat-hien-nay-5.jpg');
 
+  insert into Users values('User1', '0123456789', '123456', 'user', 'abc123@gmail.com')	
+	
 select top 6 * from (select ROW_NUMBER() OVER(order by drink_id) as IndexNo, * from (Select distinct * from Drink) as TempA) as TempB Where IndexNo Between 1 and 6
+select top 6 * from (select ROW_NUMBER() OVER(order by drink_id) as IndexNo, * from (Select distinct * from Drink where ingredient like '%Coffee%') as TempA) as TempB Where IndexNo Between 1 and 6 
+
 
   

@@ -49,7 +49,7 @@
                         <a href="service.html" class="nav-item nav-link">Service</a>
                         <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link active">Menu</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Find Drink</a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="reservation.html" class="dropdown-item">Reservation</a>
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
@@ -72,6 +72,8 @@
                 <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Your Cart</h1>                
             </div>
         </div>
+
+        <!-- Cart Start -->
         <form action="">
             <div style="margin-bottom: 50px;" class="card">
                 <div class="row">
@@ -103,7 +105,15 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="back-to-shop"><a href="#"><button>&leftarrow;</a><span class="text-muted">Back to shop</span></button></div>
+                        <c:if test="${empty DAOCart.getCart(id)}">
+                            <p style="margin-left: 30px">YOU CART IS EMPTY</p>
+                        </c:if>
+                        <div class="back-to-shop">
+                            <a href="GetMenuForEachPage?PageNumber=1">
+                                <button>&leftarrow;</a>
+                            <span class="text-muted"> <a href="GetMenuForEachPage?PageNumber=1">Back to shop</a></span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="col-md-4 summary">
@@ -113,8 +123,8 @@
                             <div class="col" style="padding-left:0;">ITEMS PRICE</div>
                             <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
                         </div>
-                        <p>SHIPPING</p>
-                        <select><option class="text-muted">Standard-Delivery- &dollar;5.00</option></select>
+                        <p>PAYMENT</p>
+                        <select><option class="text-muted">Pay by PayPal </option></select>
                         <p>YOUR ADDRESS</p>
                         <input id="code" name="address" placeholder="Enter your code">
                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
@@ -126,5 +136,7 @@
                 </div>
             </div>
         </form>
+        <!-- Cart End -->
+
     </body>
 </html>
