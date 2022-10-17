@@ -55,10 +55,10 @@
                                 <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Smoothie" class="dropdown-item">Smoothie</a>
                             </div>
                         </div>
-                        <c:if test="${empty Name}">
+                        <c:if test="${empty Email}">
                             <a href="LoginPage.jsp" class="nav-item nav-link">Login</a>
                         </c:if>
-                        <c:if test="${not empty Name}">
+                        <c:if test="${not empty Email}">
                             <a href="" class="nav-item nav-link">Your Order</a>
                             <a href="Logout" class="nav-item nav-link">Logout</a>
                         </c:if>

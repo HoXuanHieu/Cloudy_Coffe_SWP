@@ -67,6 +67,7 @@ public class Logout extends HttpServlet {
             }
         }
         session.setAttribute("Name", null);
+        session.setAttribute("Email", null);
         request.getRequestDispatcher("DataForIndexPage?PageNumber=1").include(request, response);
     }
 
