@@ -145,7 +145,30 @@ public class DAOUser {
         }
         return users;
     }
-
+    
+    public static User getUserByID(int id) {
+        DBConnection db = DBConnection.getInstance();
+        String sqlQuery = "SELECT * FROM Users WHERE userId = ?;";
+        try {
+            Connection connect = db.getConnection();
+            PreparedStatement statement = connect.prepareStatement(sqlQuery);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int user_id = result.getInt(1);
+                String name = result.getString(2);
+                String phone = result.getString(3);
+                String password = result.getString(4);
+                String type = result.getString(5);
+                String email = result.getString(6);
+                return new User(user_id, name, phone, password, type, email);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+    
     public static boolean RegisterUser(User user) {
         DBConnection db = DBConnection.getInstance();
         String sql = "INSERT INTO Users VALUES (?,?,?,?,?);";

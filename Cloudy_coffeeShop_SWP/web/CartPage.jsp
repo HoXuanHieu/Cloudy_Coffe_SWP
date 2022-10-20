@@ -74,7 +74,7 @@
         </div>
 
         <!-- Cart Start -->
-        <form action="">
+        <form action="authorize_payment" method="POST">
             <div style="margin-bottom: 50px;" class="card">
                 <div class="row">
                     <div class="col-md-8 cart">
@@ -124,12 +124,12 @@
                             <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
                         </div>
                         <p>PAYMENT</p>
-                        <select><option class="text-muted">Pay by PayPal </option></select>
+                        <select><option class="text-muted">Pay by PayPal</option></select>
                         <p>YOUR ADDRESS</p>
                         <input id="code" name="address" placeholder="Enter your code">
                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
-                            <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id) + 5}</div>
+                            <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
                         </div>
                         <button style="margin-top: 10px;" class="btn" type="submit">CHECKOUT</button>
                     </div>

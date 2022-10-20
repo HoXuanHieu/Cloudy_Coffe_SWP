@@ -3,24 +3,31 @@
  *  To change this template file, choose Tools | Templates
  *  and open the template in the editor.
  */
-package Controller;
+package Paypal;
 
 import DAO.DAOCart;
-import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.paypal.api.payments.*;
+import com.paypal.base.rest.PayPalRESTException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asus
  */
-public class AddCart extends HttpServlet {
+@WebServlet("/execute_payment")
+public class ExecutePaymentServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    public ExecutePaymentServlet() {
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +46,10 @@ public class AddCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCart</title>");
+            out.println("<title>Servlet ExecutePaymentServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ExecutePaymentServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +82,31 @@ public class AddCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Cart> carts = DAOCart.getCart((int) session.getAttribute("userId"));
-        session.setAttribute("carts", carts);
-        int user_id = (int) session.getAttribute("userId");
-        int drink_id = Integer.parseInt(request.getParameter("drinkId"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
-        boolean modify = false;
-        for (int i = 0; i < carts.size(); i++) {
-            if (carts.get(i).getDrink_id() == drink_id) {
-                DAOCart.modifyCart(drink_id, carts.get(i).getAmount() + amount);
-                modify = true;
-                break;
+        String paymentId = request.getParameter("paymentId");
+        String payerId = request.getParameter("PayerID");
+
+        try {
+            PaymentServices paymentServices = new PaymentServices();
+            Payment payment = paymentServices.executePayment(paymentId, payerId);
+            if (payment == null) {
+                throw new PayPalRESTException("Error!");
             }
+//            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
+            Transaction transaction = payment.getTransactions().get(0);
+
+//            request.setAttribute("payer", payerInfo);
+            request.setAttribute("transaction", transaction);
+            int userId = (int) session.getAttribute("userId");
+            String address = (String) session.getAttribute("address");
+            DAOCart.payCart(userId, address);
+            session.removeAttribute("carts");
+            request.getRequestDispatcher("Receipt.jsp").forward(request, response);
+
+        } catch (PayPalRESTException ex) {
+            request.setAttribute("errorMessage", ex.getMessage());
+            ex.printStackTrace();
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-        if (!modify) {
-            DAOCart.addCart(user_id, drink_id, amount);
-        }
-        request.getRequestDispatcher("CartPage.jsp").include(request, response);
     }
 
     /**

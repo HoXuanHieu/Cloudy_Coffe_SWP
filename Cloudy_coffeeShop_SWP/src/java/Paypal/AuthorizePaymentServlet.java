@@ -3,24 +3,30 @@
  *  To change this template file, choose Tools | Templates
  *  and open the template in the editor.
  */
-package Controller;
+package Paypal;
 
 import DAO.DAOCart;
-import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.paypal.base.rest.PayPalRESTException;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asus
  */
-public class AddCart extends HttpServlet {
+@WebServlet("/authorize_payment")
+public class AuthorizePaymentServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    public AuthorizePaymentServlet() {
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +45,10 @@ public class AddCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCart</title>");
+            out.println("<title>Servlet AuthorizePaymentServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AuthorizePaymentServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +81,25 @@ public class AddCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Cart> carts = DAOCart.getCart((int) session.getAttribute("userId"));
-        session.setAttribute("carts", carts);
-        int user_id = (int) session.getAttribute("userId");
-        int drink_id = Integer.parseInt(request.getParameter("drinkId"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
-        boolean modify = false;
-        for (int i = 0; i < carts.size(); i++) {
-            if (carts.get(i).getDrink_id() == drink_id) {
-                DAOCart.modifyCart(drink_id, carts.get(i).getAmount() + amount);
-                modify = true;
-                break;
-            }
+        
+        String userId = (int) session.getAttribute("userId") + "";
+        String itemTotal = DAOCart.getTotalPrice(Integer.parseInt(userId)) + "";
+        String shipping = "1.5";
+        String total = (Float.parseFloat(itemTotal) + Float.parseFloat(shipping)) + "";
+        String address = request.getParameter("address");
+        session.setAttribute("address", address);
+        
+        OrderDetail orderDetail = new OrderDetail(userId, itemTotal, shipping, total);
+
+        try {
+            PaymentServices paymentServices = new PaymentServices();
+            String approvalLink = paymentServices.authorizePayment(orderDetail);
+            response.sendRedirect(approvalLink);
+        } catch (PayPalRESTException ex) {
+            request.setAttribute("errorMessage", ex.getMessage());
+            ex.printStackTrace();
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-        if (!modify) {
-            DAOCart.addCart(user_id, drink_id, amount);
-        }
-        request.getRequestDispatcher("CartPage.jsp").include(request, response);
     }
 
     /**

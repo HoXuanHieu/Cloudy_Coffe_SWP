@@ -13,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,7 +116,7 @@ public class DAOCart {
         }
         return drink;
     }
-    
+
     public static int getTotalPrice(int user_id) {
         DBConnection db = DBConnection.getInstance();
         String sqlQuery = "SELECT SUM(amount * price) FROM Drink INNER JOIN Carts ON Drink.drink_id = Carts.drink_id AND Carts.userId = ?;";
@@ -132,7 +134,7 @@ public class DAOCart {
         }
         return total;
     }
-    
+
     public static void removeCart(int cart_id) {
         DBConnection db = DBConnection.getInstance();
         String sqlQuery = "DELETE FROM Carts WHERE cart_id = ?;";
@@ -147,5 +149,25 @@ public class DAOCart {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
+    public static void payCart(int userId, String address) {
+        DBConnection db = DBConnection.getInstance();
+        String sqlQuery = "UPDATE Carts SET User_address = ?, checkout = ?, dateCheckout = ? WHERE userId = ? AND checkout = ?";
+        try {
+            Connection connect = db.getConnection();
+            PreparedStatement statement = connect.prepareStatement(sqlQuery);
+            statement.setString(1, address);
+            statement.setBoolean(2, true);
+            Date datecheckout = new Date(System.currentTimeMillis());
+            statement.setDate(3, datecheckout);
+            statement.setInt(4, userId);
+            statement.setBoolean(5, false);
+            statement.execute();
+            statement.close();
+            connect.close();
+        } catch (SQLException e) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
 }
