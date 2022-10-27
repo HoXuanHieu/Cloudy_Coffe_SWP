@@ -109,8 +109,7 @@
                         <div class="col-lg-6">
                             <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                                 <h1 class="text-white mb-4 mt-5">Book Your Table</h1>
-                                <form action="" class="mb-5">
-
+                                <form action="BookingServlet" method="POST" class="mb-5">
                                     <c:if test="${empty Email}">
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Name" required="required" />
@@ -133,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <select class="custom-select bg-transparent border-primary px-4" style="height: 49px;" required>                                    
+                                        <select name="time" class="custom-select bg-transparent border-primary px-4" style="height: 49px;" required>                                    
                                             <option value="06:00:00">06:00 AM</option>
                                             <option value="06:30:00">06:30 AM</option>
                                             <option value="07:00:00">07:00 AM</option>
@@ -174,10 +173,10 @@
                                                                     </div>
                                                                 </div>-->
                                     <div class="form-group">
-                                        <input type="number" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Number Of Person" required="required" min="1" max ="20"/>                         
+                                        <input name="people" type="number" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Number Of Person" required="required" min="1" max ="20"/>                         
                                     </div>
                                     <div>
-                                        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Book Now</button>
+                                        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit" name="action" value="Booking">Book Now</button>
                                     </div>
                                 </form>
                             </div>

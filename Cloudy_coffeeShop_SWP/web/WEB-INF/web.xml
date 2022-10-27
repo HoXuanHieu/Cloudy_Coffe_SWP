@@ -60,6 +60,10 @@
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <servlet-class>Paypal.ExecutePaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>Controller.BookingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetMenuForEachPage</servlet-name>
         <url-pattern>/GetMenuForEachPage</url-pattern>
@@ -124,6 +128,10 @@
     <servlet-mapping>
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <url-pattern>/ExecutePaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

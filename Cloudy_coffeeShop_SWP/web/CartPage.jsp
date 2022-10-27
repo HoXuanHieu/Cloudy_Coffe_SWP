@@ -109,10 +109,9 @@
                             <p style="margin-left: 30px">YOU CART IS EMPTY</p>
                         </c:if>
                         <div class="back-to-shop">
-                            <a href="GetMenuForEachPage?PageNumber=1">
-                                <button>&leftarrow;</a>
-                            <span class="text-muted"> <a href="GetMenuForEachPage?PageNumber=1">Back to shop</a></span>
-                            </button>
+                            <a href="DataForIndexPage?PageNumber=1">
+                                &leftarrow;<span class="text-muted"> Back to shop</span>
+                            </a>
                         </div>
                     </div>
 
@@ -126,7 +125,7 @@
                         <p>PAYMENT</p>
                         <select><option class="text-muted">Pay by PayPal</option></select>
                         <p>YOUR ADDRESS</p>
-                        <input id="code" name="address" placeholder="Enter your code">
+                        <input id="code" name="address" placeholder="ENTER YOUR ADDRESS" required>
                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
                             <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
