@@ -173,7 +173,7 @@
                                                                     </div>
                                                                 </div>-->
                                     <div class="form-group">
-                                        <input name="people" type="number" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Number Of Person" required="required" min="1" max ="20"/>                         
+                                        <input name="people" type="number" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Number Of Person" required="required" min="1" max ="20">                         
                                     </div>
                                     <div>
                                         <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit" name="action" value="Booking">Book Now</button>

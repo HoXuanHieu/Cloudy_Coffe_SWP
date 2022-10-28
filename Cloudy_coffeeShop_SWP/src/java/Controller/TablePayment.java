@@ -5,21 +5,18 @@
  */
 package Controller;
 
-import Model.Table;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asus
  */
-public class BookingServlet extends HttpServlet {
+public class TablePayment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class BookingServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BookingServlet</title>");
+            out.println("<title>Servlet TablePayment</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BookingServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TablePayment at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,29 +70,7 @@ public class BookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String action = request.getParameter("action");
-        String time = request.getParameter("time");
-        String people = request.getParameter("people");
-        if (action.equals("Booking")) {
-            request.setAttribute("time", time);
-            request.setAttribute("people", people);
-            request.getRequestDispatcher("Table.jsp").forward(request, response);
-        } else if (action.equals("ChooseTable")) {
-            ArrayList<Table> tables = new ArrayList<>();
-            for (int i = 0; i < 24; i++) {
-                String id = "A" + i;
-//                int status = Integer.parseInt(request.getParameter(id));
-                int status = Integer.parseInt("4");
-                if (status == 2) {
-                    tables.add(new Table(i, "Beautiful", 4, false, 4));
-                }
-            }
-            session.setAttribute("tables", tables);
-            request.getRequestDispatcher("AuthorizePaymentServlet?action=book").forward(request, response);
-        } else {
-
-        }
+        processRequest(request, response);
     }
 
     /**

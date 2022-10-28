@@ -85,33 +85,61 @@ public class ReviewPaymentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
+        String action = (String) session.getAttribute("action");
+        if (action.equals("checkout")) {
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                Payment payment = paymentServices.getPaymentDetails(paymentId);
 
-        try {
-            PaymentServices paymentServices = new PaymentServices();
-            Payment payment = paymentServices.getPaymentDetails(paymentId);
-            
-            Payer payer = new Payer();
-            payer.setPaymentMethod("paypal");
-            PayerInfo payerInfo = new PayerInfo();
-            User user = DAOUser.getUserByID((int) session.getAttribute("userId"));
-            payerInfo.setFirstName("").setLastName(user.getName()).setEmail(user.getEmail());
-            payer.setPayerInfo(payerInfo);
-            
-            Transaction transaction = payment.getTransactions().get(0);
-            String shippingAddress = (String) session.getAttribute("address");
+                Payer payer = new Payer();
+                payer.setPaymentMethod("paypal");
+                PayerInfo payerInfo = new PayerInfo();
+                User user = DAOUser.getUserByID((int) session.getAttribute("userId"));
+                payerInfo.setFirstName("").setLastName(user.getName()).setEmail(user.getEmail());
+                payer.setPayerInfo(payerInfo);
 
-            request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);
-            request.setAttribute("shippingAddress", shippingAddress);
+                Transaction transaction = payment.getTransactions().get(0);
+                String shippingAddress = (String) session.getAttribute("address");
 
-            String url = "Review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
+                request.setAttribute("payer", payerInfo);
+                request.setAttribute("transaction", transaction);
+                request.setAttribute("shippingAddress", shippingAddress);
 
-            request.getRequestDispatcher(url).forward(request, response);
+                String url = "Review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
 
-        } catch (PayPalRESTException ex) {
-            request.setAttribute("errorMessage", ex.getMessage());
-            ex.printStackTrace();
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+                request.getRequestDispatcher(url).forward(request, response);
+
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        } else if (action.equals("book")) {
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                Payment payment = paymentServices.getPaymentDetails(paymentId);
+
+                Payer payer = new Payer();
+                payer.setPaymentMethod("paypal");
+                PayerInfo payerInfo = new PayerInfo();
+                User user = DAOUser.getUserByID((int) session.getAttribute("userId"));
+                payerInfo.setFirstName("").setLastName(user.getName()).setEmail(user.getEmail());
+                payer.setPayerInfo(payerInfo);
+
+                Transaction transaction = payment.getTransactions().get(0);
+
+                request.setAttribute("payer", payerInfo);
+                request.setAttribute("transaction", transaction);
+
+                String url = "Review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
+
+                request.getRequestDispatcher(url).forward(request, response);
+
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
         }
     }
 

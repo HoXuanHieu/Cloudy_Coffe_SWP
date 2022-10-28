@@ -130,7 +130,7 @@
                             <div class="col">TOTAL PRICE</div>
                             <div class="col text-right">&dollar; ${DAOCart.getTotalPrice(id)}</div>
                         </div>
-                        <button style="margin-top: 10px;" class="btn" type="submit">CHECKOUT</button>
+                        <button style="margin-top: 10px;" class="btn" type="submit" name="action" value="checkout">CHECKOUT</button>
                     </div>
                 </div>
             </div>

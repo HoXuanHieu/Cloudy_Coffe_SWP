@@ -35,50 +35,50 @@
                 <small>Ocuppied</small>
             </li>
         </ul>
-        <form action="BookingServlet" method="POST">
-            <input type="hidden" name="time" value=${requestScope.time}/>
-            <input type="hidden" name="people" value=${requestScope.people}/>
+        <form action="BookingServlet" method="POST" onsubmit="return check()" >
+            <input id="time" type="hidden" name="time" value='${requestScope.time}'/>
+            <input id="people" type="hidden" name="people" value='${requestScope.people}'/>
             <div class="container">
                 <div class="row">
-                    <input id="button" type="button" onclick="alert('Hello');" name="A1" value="0">
-                    <button type="button" onclick='chooseTable(this.name)' name="A2" value="0">A2</button>
-                    <button type="button" onclick="chooseTable()" name="A3" value="0">A3</button>
-                    <button type="button" onclick="chooseTable()" name="A4" value="0">A4</button>
+                    <button id="A1" type="button" onclick="chooseTable(this.id)" name="4" value="1">A1</button>
+                    <button id="A2" type="button" onclick="chooseTable(this.id)" name="4" value="1">A2</button>
+                    <button id="A3" type="button" onclick="chooseTable(this.id)" name="4" value="1">A3</button>
+                    <button id="A4" type="button" onclick="chooseTable(this.id)" name="4" value="1">A4</button>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="chooseTable()" name="A5" value="0">A5</button>
-                    <button type="button" onclick="chooseTable()" name="A6" value="0">A6</button>
-                    <button type="button" onclick="chooseTable()" name="A7" value="0">A7</button>
-                    <button type="button" onclick="chooseTable()" name="A8" value="0">A8</button>
+                    <button id="A5" type="button" onclick="chooseTable(this.id)" name="4" value="1">A5</button>
+                    <button id="A6" type="button" onclick="chooseTable(this.id)" name="4" value="1">A6</button>
+                    <button id="A7" type="button" onclick="chooseTable(this.id)" name="4" value="1">A7</button>
+                    <button id="A8" type="button" onclick="chooseTable(this.id)" name="4" value="">A8</button>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="chooseTable()" name="A9" value="0">A9</button>
-                    <button type="button" onclick="chooseTable()" name="A10" value="0">A10</button>
-                    <button type="button" onclick="chooseTable()" name="A11" value="0">A11</button>
-                    <button type="button" onclick="chooseTable()" name="A12" value="0">A12</button>
+                    <button id="A9" type="button" onclick="chooseTable(this.id)" name="4" value="1">A9</button>
+                    <button id="A10" type="button" onclick="chooseTable(this.id)" name="4" value="1">A10</button>
+                    <button id="A11" type="button" onclick="chooseTable(this.id)" name="4" value="1">A11</button>
+                    <button id="A12" type="button" onclick="chooseTable(this.id)" name="4" value="1">A12</button>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="chooseTable()" name="A13" value="0">A13</button>
-                    <button type="button" onclick="chooseTable()" name="A14" value="0">A14</button>
-                    <button type="button" onclick="chooseTable()" name="A15" value="0">A15</button>
-                    <button type="button" onclick="chooseTable()" name="A16" value="0">A16</button>
+                    <button id="A13" type="button" onclick="chooseTable(this.id)" name="4" value="1">A13</button>
+                    <button id="A14" type="button" onclick="chooseTable(this.id)" name="4" value="1">A14</button>
+                    <button id="A15" type="button" onclick="chooseTable(this.id)" name="4" value="1">A15</button>
+                    <button id="A16" type="button" onclick="chooseTable(this.id)" name="4" value="1">A16</button>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="chooseTable()" name="A17" value="0">A17</button>
-                    <button type="button" onclick="chooseTable()" name="A18" value="0">A18</button>
-                    <button type="button" onclick="chooseTable()" name="A19" value="0">A19</button>
-                    <button type="button" onclick="chooseTable()" name="A20" value="0">A20</button>
+                    <button id="A17" type="button" onclick="chooseTable(this.id)" name="4" value="1">A17</button>
+                    <button id="A18" type="button" onclick="chooseTable(this.id)" name="4" value="1">A18</button>
+                    <button id="A19" type="button" onclick="chooseTable(this.id)" name="4" value="1">A19</button>
+                    <button id="A20" type="button" onclick="chooseTable(this.id)" name="4" value="1">A20</button>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="chooseTable()" name="A21" value="0">A21</button>
-                    <button type="button" onclick="chooseTable()" name="A22" value="0">A22</button>
-                    <button type="button" onclick="chooseTable()" name="A23" value="0">A23</button>
-                    <button type="button" onclick="chooseTable()" name="A24" value="0">A24</button>
+                    <button id="A21" type="button" onclick="chooseTable(this.id)" name="4" value="1">A21</button>
+                    <button id="A22" type="button" onclick="chooseTable(this.id)" name="4" value="1">A22</button>
+                    <button id="A23" type="button" onclick="chooseTable(this.id)" name="4" value="1">A23</button>
+                    <button id="A24" type="button" onclick="chooseTable(this.id)" name="4" value="1">A24</button>
                 </div>
-                <button id="submit-button" style="margin-left: 450px; padding: 0;" name="action" value="ChooseTable">Choose Table</button>
+                <button id="action" style="margin-left: 450px; padding: 0;" name="action" value="ChooseTable">Choose Table</button>
             </div>
         </form>
-            <input type="button" onclick="chooseTable();" value="A4">
+            
         <style>
             @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
             *{
@@ -106,7 +106,6 @@
                 font-size: 14px;
                 margin-left: 10px;
                 padding: 10px 50px 10px 50px;
-
             }
             .row
             {

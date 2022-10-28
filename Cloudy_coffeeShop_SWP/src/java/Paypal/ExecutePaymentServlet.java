@@ -6,6 +6,7 @@
 package Paypal;
 
 import DAO.DAOCart;
+import Model.Table;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 
@@ -84,28 +86,55 @@ public class ExecutePaymentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
-
-        try {
-            PaymentServices paymentServices = new PaymentServices();
-            Payment payment = paymentServices.executePayment(paymentId, payerId);
-            if (payment == null) {
-                throw new PayPalRESTException("Error!");
-            }
+        String action = (String) session.getAttribute("action");
+        if (action.equals("checkout")) {
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                Payment payment = paymentServices.executePayment(paymentId, payerId);
+                if (payment == null) {
+                    throw new PayPalRESTException("Error!");
+                }
 //            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
-            Transaction transaction = payment.getTransactions().get(0);
+                Transaction transaction = payment.getTransactions().get(0);
 
 //            request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);
-            int userId = (int) session.getAttribute("userId");
-            String address = (String) session.getAttribute("address");
-            DAOCart.payCart(userId, address);
-            session.removeAttribute("carts");
-            request.getRequestDispatcher("Receipt.jsp").forward(request, response);
+                request.setAttribute("transaction", transaction);
+                int userId = (int) session.getAttribute("userId");
+                String address = (String) session.getAttribute("address");
+                DAOCart.payCart(userId, address);
+                session.removeAttribute("carts");
+                session.removeAttribute("action");
+                request.getRequestDispatcher("Receipt.jsp").forward(request, response);
 
-        } catch (PayPalRESTException ex) {
-            request.setAttribute("errorMessage", ex.getMessage());
-            ex.printStackTrace();
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        } else if (action.equals("book")) {
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                Payment payment = paymentServices.executePayment(paymentId, payerId);
+                if (payment == null) {
+                    throw new PayPalRESTException("Error!");
+                }
+//            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
+                Transaction transaction = payment.getTransactions().get(0);
+
+//            request.setAttribute("payer", payerInfo);
+                request.setAttribute("transaction", transaction);
+                int userId = (int) session.getAttribute("userId");
+                ArrayList<Table> table = (ArrayList<Table>) session.getAttribute("tables");
+                //DAOTables 
+                session.removeAttribute("tables");
+                session.removeAttribute("action");
+                request.getRequestDispatcher("Receipt.jsp").forward(request, response);
+
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
         }
     }
 

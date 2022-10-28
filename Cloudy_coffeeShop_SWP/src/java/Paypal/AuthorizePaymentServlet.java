@@ -22,9 +22,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/authorize_payment")
 public class AuthorizePaymentServlet extends HttpServlet {
-
+    
     private static final long serialVersionUID = 1L;
-
+    
     public AuthorizePaymentServlet() {
     }
 
@@ -66,7 +66,7 @@ public class AuthorizePaymentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -81,24 +81,44 @@ public class AuthorizePaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        String userId = (int) session.getAttribute("userId") + "";
-        String itemTotal = DAOCart.getTotalPrice(Integer.parseInt(userId)) + "";
-        String shipping = "1.5";
-        String total = (Float.parseFloat(itemTotal) + Float.parseFloat(shipping)) + "";
-        String address = request.getParameter("address");
-        session.setAttribute("address", address);
-        
-        OrderDetail orderDetail = new OrderDetail(userId, itemTotal, shipping, total);
-
-        try {
-            PaymentServices paymentServices = new PaymentServices();
-            String approvalLink = paymentServices.authorizePayment(orderDetail);
-            response.sendRedirect(approvalLink);
-        } catch (PayPalRESTException ex) {
-            request.setAttribute("errorMessage", ex.getMessage());
-            ex.printStackTrace();
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        session.setAttribute("action", action);
+        if (action.equals("checkout")) {
+            String userId = (int) session.getAttribute("userId") + "";
+            String itemTotal = DAOCart.getTotalPrice(Integer.parseInt(userId)) + "";
+            String shipping = "1.5";
+            String total = (Float.parseFloat(itemTotal) + Float.parseFloat(shipping)) + "";
+            String address = request.getParameter("address");
+            session.setAttribute("address", address);
+            
+            OrderDetail orderDetail = new OrderDetail(userId, itemTotal, shipping, total);
+            
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                String approvalLink = paymentServices.authorizePayment(orderDetail);
+                response.sendRedirect(approvalLink);
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        } else if (action.equals("book")) {
+            String userId = (int) session.getAttribute("userId") + "";
+            String itemTotal = "4";
+            String shipping = "0";
+            String total = (Float.parseFloat(itemTotal) + Float.parseFloat(shipping)) + "";
+            
+            OrderDetail orderDetail = new OrderDetail(userId, itemTotal, shipping, total);
+            
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                String approvalLink = paymentServices.authorizePayment(orderDetail);
+                response.sendRedirect(approvalLink);
+            } catch (PayPalRESTException ex) {
+                request.setAttribute("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
         }
     }
 
