@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,9 +15,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Table booking</title>
         <link rel=stylesheet" href="css/cssForTable.css" />
-        <script>
-            
-        </script>
     </head>
     <body>
         <p class="text">
@@ -36,49 +35,63 @@
             </li>
         </ul>
         <form action="BookingServlet" method="POST" onsubmit="return check()" >
+            <input id="date" type="hidden" name="date" value='${requestScope.date}'/>
             <input id="time" type="hidden" name="time" value='${requestScope.time}'/>
             <input id="people" type="hidden" name="people" value='${requestScope.people}'/>
+            <input id="information" type="hidden" name="information" value='' />
             <div class="container">
-                <div class="row">
-                    <button id="A1" type="button" onclick="chooseTable(this.id)" name="4" value="1">A1</button>
-                    <button id="A2" type="button" onclick="chooseTable(this.id)" name="4" value="1">A2</button>
-                    <button id="A3" type="button" onclick="chooseTable(this.id)" name="4" value="1">A3</button>
-                    <button id="A4" type="button" onclick="chooseTable(this.id)" name="4" value="1">A4</button>
-                </div>
-                <div class="row">
-                    <button id="A5" type="button" onclick="chooseTable(this.id)" name="4" value="1">A5</button>
-                    <button id="A6" type="button" onclick="chooseTable(this.id)" name="4" value="1">A6</button>
-                    <button id="A7" type="button" onclick="chooseTable(this.id)" name="4" value="1">A7</button>
-                    <button id="A8" type="button" onclick="chooseTable(this.id)" name="4" value="">A8</button>
-                </div>
-                <div class="row">
-                    <button id="A9" type="button" onclick="chooseTable(this.id)" name="4" value="1">A9</button>
-                    <button id="A10" type="button" onclick="chooseTable(this.id)" name="4" value="1">A10</button>
-                    <button id="A11" type="button" onclick="chooseTable(this.id)" name="4" value="1">A11</button>
-                    <button id="A12" type="button" onclick="chooseTable(this.id)" name="4" value="1">A12</button>
-                </div>
-                <div class="row">
-                    <button id="A13" type="button" onclick="chooseTable(this.id)" name="4" value="1">A13</button>
-                    <button id="A14" type="button" onclick="chooseTable(this.id)" name="4" value="1">A14</button>
-                    <button id="A15" type="button" onclick="chooseTable(this.id)" name="4" value="1">A15</button>
-                    <button id="A16" type="button" onclick="chooseTable(this.id)" name="4" value="1">A16</button>
-                </div>
-                <div class="row">
-                    <button id="A17" type="button" onclick="chooseTable(this.id)" name="4" value="1">A17</button>
-                    <button id="A18" type="button" onclick="chooseTable(this.id)" name="4" value="1">A18</button>
-                    <button id="A19" type="button" onclick="chooseTable(this.id)" name="4" value="1">A19</button>
-                    <button id="A20" type="button" onclick="chooseTable(this.id)" name="4" value="1">A20</button>
-                </div>
-                <div class="row">
-                    <button id="A21" type="button" onclick="chooseTable(this.id)" name="4" value="1">A21</button>
-                    <button id="A22" type="button" onclick="chooseTable(this.id)" name="4" value="1">A22</button>
-                    <button id="A23" type="button" onclick="chooseTable(this.id)" name="4" value="1">A23</button>
-                    <button id="A24" type="button" onclick="chooseTable(this.id)" name="4" value="1">A24</button>
-                </div>
+                <c:set var="tables" value="${requestScope.tables}"/>
+                <c:forEach var="i" items="${tables}" varStatus="count">
+                    <c:choose>
+                        <c:when test="${i.getCheck_Available() == 0}">
+                            <button style="background-color: white;" id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}" disabled>${count.count}</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}">${count.count}</button>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <!--                <div class="row">
+                                    <button id="A1" type="button" onclick="chooseTable(this.id)" name="4" value="1">A1</button>
+                                    <button id="A2" type="button" onclick="chooseTable(this.id)" name="4" value="1">A2</button>
+                                    <button id="A3" type="button" onclick="chooseTable(this.id)" name="4" value="1">A3</button>
+                                    <button id="A4" type="button" onclick="chooseTable(this.id)" name="4" value="1">A4</button>
+                                </div>
+                                <div class="row">
+                                    <button id="A5" type="button" onclick="chooseTable(this.id)" name="4" value="1">A5</button>
+                                    <button id="A6" type="button" onclick="chooseTable(this.id)" name="4" value="1">A6</button>
+                                    <button id="A7" type="button" onclick="chooseTable(this.id)" name="4" value="1">A7</button>
+                                    <button id="A8" type="button" onclick="chooseTable(this.id)" name="4" value="">A8</button>
+                                </div>
+                                <div class="row">
+                                    <button id="A9" type="button" onclick="chooseTable(this.id)" name="4" value="1">A9</button>
+                                    <button id="A10" type="button" onclick="chooseTable(this.id)" name="4" value="1">A10</button>
+                                    <button id="A11" type="button" onclick="chooseTable(this.id)" name="4" value="1">A11</button>
+                                    <button id="A12" type="button" onclick="chooseTable(this.id)" name="4" value="1">A12</button>
+                                </div>
+                                <div class="row">
+                                    <button id="A13" type="button" onclick="chooseTable(this.id)" name="4" value="1">A13</button>
+                                    <button id="A14" type="button" onclick="chooseTable(this.id)" name="4" value="1">A14</button>
+                                    <button id="A15" type="button" onclick="chooseTable(this.id)" name="4" value="1">A15</button>
+                                    <button id="A16" type="button" onclick="chooseTable(this.id)" name="4" value="1">A16</button>
+                                </div>
+                                <div class="row">
+                                    <button id="A17" type="button" onclick="chooseTable(this.id)" name="4" value="1">A17</button>
+                                    <button id="A18" type="button" onclick="chooseTable(this.id)" name="4" value="1">A18</button>
+                                    <button id="A19" type="button" onclick="chooseTable(this.id)" name="4" value="1">A19</button>
+                                    <button id="A20" type="button" onclick="chooseTable(this.id)" name="4" value="1">A20</button>
+                                </div>
+                                <div class="row">
+                                    <button id="A21" type="button" onclick="chooseTable(this.id)" name="4" value="1">A21</button>
+                                    <button id="A22" type="button" onclick="chooseTable(this.id)" name="4" value="1">A22</button>
+                                    <button id="A23" type="button" onclick="chooseTable(this.id)" name="4" value="1">A23</button>
+                                    <button id="A24" type="button" onclick="chooseTable(this.id)" name="4" value="1">A24</button>
+                                </div>-->
+                
                 <button id="action" style="margin-left: 450px; padding: 0;" name="action" value="ChooseTable">Choose Table</button>
             </div>
         </form>
-            
+
         <style>
             @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
             *{
@@ -163,7 +176,8 @@
             }
             .container
             {
-                perspective: 1000px;
+                margin: auto;
+                width: 55%;
                 margin-bottom: 30px;
             }
             p.text {
@@ -206,6 +220,6 @@
         </style>
 
         <script src="js/TableJS.js"></script>
-        
+
     </body>
 </html>

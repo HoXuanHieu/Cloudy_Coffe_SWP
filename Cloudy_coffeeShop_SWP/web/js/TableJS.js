@@ -33,12 +33,15 @@
 
 function chooseTable(id) {
     var table = document.getElementById(id);
-    if (table.value == 1) {
-        table.value = 2;
+    var information = document.getElementById('information');
+    if (table.name == 1) {
+        table.name = 2;
         table.style.backgroundColor = '#765852';
+        information.value += table.value + " ";
     } else {
-        table.value = 1;
+        table.name = 1;
         table.style.backgroundColor = '#614504';
+        information.value = information.value.replace(table.value + " ", "");
     }
 }
 
@@ -47,20 +50,20 @@ function check() {
     var num = 0;
     var buttons = document.getElementsByTagName('button');
     for (var i = 0, len = buttons.length; i < len; i++) {
-        if (buttons[i].value == 2) {
-            num += parseInt(buttons[i].name);
+        if (buttons[i].name == 2) {
+            num += 4;
         }
     }
     if (num < people) {
         if (confirm("Don't book enough seat for " + people + " people\nDo you want to continue?")) {
-            for (var i = 0, len = buttons.length; i < len; i++) {
-                buttons[i].name = buttons[i].id;
-            }
+//            for (var i = 0, len = buttons.length; i < len; i++) {
+//                buttons[i].name = buttons[i].id;
+//            }
         }
     } else {
-        for (var i = 0, len = buttons.length; i < len; i++) {
-            buttons[i].name = buttons[i].id;
-        }
+//        for (var i = 0, len = buttons.length; i < len; i++) {
+//            buttons[i].name = buttons[i].id;
+//        }
         this.form.submit();
     }
 }

@@ -14,18 +14,16 @@ public class Table {
     private int table_id;
     private String location;
     private float price;
-    private boolean check_Available;
-    private int people;
+    private int check_Available;
 
     public Table() {
     }
 
-    public Table(int table_id, String location, float price, boolean check_Available, int people) {
+    public Table(int table_id, String location, float price, int check_Available) {
         this.table_id = table_id;
         this.location = location;
         this.price = price;
         this.check_Available = check_Available;
-        this.people = people;
     }
 
     public int getTable_id() {
@@ -52,20 +50,12 @@ public class Table {
         this.price = price;
     }
 
-    public boolean isCheck_Available() {
+    public int getCheck_Available() {
         return check_Available;
     }
 
-    public void setCheck_Available(boolean check_Available) {
+    public void setCheck_Available(int check_Available) {
         this.check_Available = check_Available;
-    }
-
-    public int getPeople() {
-        return people;
-    }
-
-    public void setPeople(int people) {
-        this.people = people;
     }
 
 }

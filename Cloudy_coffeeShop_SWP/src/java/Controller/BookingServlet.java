@@ -5,10 +5,15 @@
  */
 package Controller;
 
+import DAO.DAOTable;
 import Model.Table;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,26 +80,30 @@ public class BookingServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
+        String date = request.getParameter("date");
         String time = request.getParameter("time");
         String people = request.getParameter("people");
         if (action.equals("Booking")) {
+            request.setAttribute("date", date);
             request.setAttribute("time", time);
             request.setAttribute("people", people);
-            request.getRequestDispatcher("Table.jsp").forward(request, response);
+            ArrayList<Table> tables = DAOTable.getTable(date, time);
+            request.setAttribute("tables", tables);
+            request.getRequestDispatcher("Table.jsp").include(request, response);
         } else if (action.equals("ChooseTable")) {
-            ArrayList<Table> tables = new ArrayList<>();
-            for (int i = 0; i < 24; i++) {
-                String id = "A" + i;
-//                int status = Integer.parseInt(request.getParameter(id));
-                int status = Integer.parseInt("4");
-                if (status == 2) {
-                    tables.add(new Table(i, "Beautiful", 4, false, 4));
-                }
-            }
-            session.setAttribute("tables", tables);
+            request.setAttribute("date", date);
+            request.setAttribute("time", time);
+            request.setAttribute("people", people);
+            String information = request.getParameter("information").trim();
+            String[] ids = information.split(" ");
+            int userId = (int) session.getAttribute("userId");
+            request.setAttribute("date", date);
+            request.setAttribute("time", time);
+            request.setAttribute("people", people);
+            DAOTable.tableOrder(userId, ids, date, time);
             request.getRequestDispatcher("AuthorizePaymentServlet?action=book").forward(request, response);
         } else {
-
+            request.getRequestDispatcher("DataForIndexPage?PageNumber=1").forward(request, response);
         }
     }
 
