@@ -13,6 +13,6 @@ public interface DBinfor {
     public static String driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String url = "jdbc:sqlserver://localhost;trustServerCertificate=true;databaseName=Cloudy_Coffee_SWP;";
     public static String user = "sa";
-    public static String pass = "forddeptrai20042002";
+    public static String pass = "hieuhohieuho123";
 
 }
