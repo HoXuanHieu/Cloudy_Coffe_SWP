@@ -60,6 +60,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         Cookie[] cookies = request.getCookies();
         String email = "";
         String name = "";
@@ -76,8 +77,8 @@ public class Login extends HttpServlet {
                 }
             }
         }
-        request.setAttribute("Name", name);
-        request.setAttribute("Email", email);
+        session.setAttribute("Name", name);
+        session.setAttribute("Email", email);
         request.getRequestDispatcher("DataForIndexPage?PageNumber=1").forward(request, response);
 
     }
@@ -122,7 +123,7 @@ public class Login extends HttpServlet {
             session.setAttribute("Email", email);
             session.setAttribute("Name", fulName);
             Cookie cookie = new Cookie("User", email);
-            cookie.setMaxAge(60 * 10);
+            cookie.setMaxAge(60 * 60);
             response.addCookie(cookie);
             session.setAttribute("userId", userId);
             request.getRequestDispatcher("DataForIndexPage?PageNumber=1").forward(request, response);

@@ -11,93 +11,134 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <title>Cloudy Coffee / Table booking</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Table booking</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+
         <link rel=stylesheet" href="css/cssForTable.css" />
+        <link href="css/style.min.css" rel="stylesheet">
     </head>
     <body>
-        <p class="text">
-            TABLE MENU
-        </p>
-        <ul class="showcase">
-            <li>
-                <div class="table"></div>
-                <small>N/A</small>
-            </li>
-            <li>
-                <div class="table selected"></div>
-                <small>Selected</small>
-            </li>
-            <li>
-                <div class="table occupied"></div>
-                <small>Ocuppied</small>
-            </li>
-        </ul>
-        <form action="BookingServlet" method="POST" onsubmit="return check()" >
-            <input id="date" type="hidden" name="date" value='${requestScope.date}'/>
-            <input id="time" type="hidden" name="time" value='${requestScope.time}'/>
-            <input id="people" type="hidden" name="people" value='${requestScope.people}'/>
-            <input id="information" type="hidden" name="information" value='' />
-            <div class="container">
-                <c:set var="tables" value="${requestScope.tables}"/>
-                <c:forEach var="i" items="${tables}" varStatus="count">
-                    <c:choose>
-                        <c:when test="${i.getCheck_Available() == 0}">
-                            <button style="background-color: white;" id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}" disabled>${count.count}</button>
-                        </c:when>
-                        <c:otherwise>
-                            <button id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}">${count.count}</button>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                <!--                <div class="row">
-                                    <button id="A1" type="button" onclick="chooseTable(this.id)" name="4" value="1">A1</button>
-                                    <button id="A2" type="button" onclick="chooseTable(this.id)" name="4" value="1">A2</button>
-                                    <button id="A3" type="button" onclick="chooseTable(this.id)" name="4" value="1">A3</button>
-                                    <button id="A4" type="button" onclick="chooseTable(this.id)" name="4" value="1">A4</button>
-                                </div>
-                                <div class="row">
-                                    <button id="A5" type="button" onclick="chooseTable(this.id)" name="4" value="1">A5</button>
-                                    <button id="A6" type="button" onclick="chooseTable(this.id)" name="4" value="1">A6</button>
-                                    <button id="A7" type="button" onclick="chooseTable(this.id)" name="4" value="1">A7</button>
-                                    <button id="A8" type="button" onclick="chooseTable(this.id)" name="4" value="">A8</button>
-                                </div>
-                                <div class="row">
-                                    <button id="A9" type="button" onclick="chooseTable(this.id)" name="4" value="1">A9</button>
-                                    <button id="A10" type="button" onclick="chooseTable(this.id)" name="4" value="1">A10</button>
-                                    <button id="A11" type="button" onclick="chooseTable(this.id)" name="4" value="1">A11</button>
-                                    <button id="A12" type="button" onclick="chooseTable(this.id)" name="4" value="1">A12</button>
-                                </div>
-                                <div class="row">
-                                    <button id="A13" type="button" onclick="chooseTable(this.id)" name="4" value="1">A13</button>
-                                    <button id="A14" type="button" onclick="chooseTable(this.id)" name="4" value="1">A14</button>
-                                    <button id="A15" type="button" onclick="chooseTable(this.id)" name="4" value="1">A15</button>
-                                    <button id="A16" type="button" onclick="chooseTable(this.id)" name="4" value="1">A16</button>
-                                </div>
-                                <div class="row">
-                                    <button id="A17" type="button" onclick="chooseTable(this.id)" name="4" value="1">A17</button>
-                                    <button id="A18" type="button" onclick="chooseTable(this.id)" name="4" value="1">A18</button>
-                                    <button id="A19" type="button" onclick="chooseTable(this.id)" name="4" value="1">A19</button>
-                                    <button id="A20" type="button" onclick="chooseTable(this.id)" name="4" value="1">A20</button>
-                                </div>
-                                <div class="row">
-                                    <button id="A21" type="button" onclick="chooseTable(this.id)" name="4" value="1">A21</button>
-                                    <button id="A22" type="button" onclick="chooseTable(this.id)" name="4" value="1">A22</button>
-                                    <button id="A23" type="button" onclick="chooseTable(this.id)" name="4" value="1">A23</button>
-                                    <button id="A24" type="button" onclick="chooseTable(this.id)" name="4" value="1">A24</button>
-                                </div>-->
-                
-                <button id="action" style="margin-left: 450px; padding: 0;" name="action" value="ChooseTable">Choose Table</button>
+        <!-- Navbar Start -->
+
+        <div class="container-fluid p-0 nav-bar">
+            <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+                <a href="DataForIndexPage?PageNumber=1" class="navbar-brand px-lg-4 m-0">
+                    <h1 class="m-0 display-4 text-uppercase text-white">Cloudy Coffee</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto p-4">
+                        <a href="DataForIndexPage?PageNumber=1" class="nav-item nav-link">Home</a>
+                        <a href="BookingPage.jsp" class="nav-item nav-link active">Booking</a>
+                        <a href="GetMenuForEachPage?PageNumber=1" class="nav-item nav-link ">Menu</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Find Drink</a>
+                            <div class="dropdown-menu text-capitalize">
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Coffee" class="dropdown-item">Coffee</a>                         
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Tea" class="dropdown-item">Tea</a>
+                                <a href="FindDrinkByKindOfDrink?PageNumber=1&find=Smoothie" class="dropdown-item">Smoothie</a>
+                            </div>
+                        </div>
+                        <c:if test="${empty Email}">
+                            <a href="LoginPage.jsp" class="nav-item nav-link">Login</a>
+                        </c:if>
+                        <c:if test="${not empty Email}">
+                            <a href="CartPage.jsp" class="nav-item nav-link">Your Order</a>
+                            <a href="Logout" class="nav-item nav-link">Logout</a>
+                        </c:if>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+            <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+                <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Choose Table</h1>
+                <div class="d-inline-flex mb-lg-5">
+                    <h5 class="m-0 text-white"><a class="text-white" href="DataForIndexPage?PageNumber=1">Home</a></h5>
+                    <p class="m-0 text-white px-2">/</p>
+                    <p class="m-0 text-white">Choose Table</p>
+                </div>
             </div>
-        </form>
+        </div>
+        <!-- Page Header End -->
+
+
+        <!-- Booking table Start -->
+        <div class="container-fluid my-5 ChooseTable">
+            <div class="container">
+                <div class="section-title">
+                    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">BOOKING</h4>
+                    <h1 class="display-4">Choose Your Table</h1>
+                </div>
+                <ul class="showcase">
+                    <li>
+                        <div class="table"></div>
+                        <small>N/A</small>
+                    </li>
+                    <li>
+                        <div class="table selected"></div>
+                        <small>Selected</small>
+                    </li>
+                    <li>
+                        <div class="table occupied"></div>
+                        <small>Ocuppied</small>
+                    </li>
+                </ul>
+                <form action="BookingServlet" method="POST" onsubmit="return check()" >
+                    <input id="date" type="hidden" name="date" value='${requestScope.date}'/>
+                    <input id="time" type="hidden" name="time" value='${requestScope.time}'/>
+                    <input id="people" type="hidden" name="people" value='${requestScope.people}'/>
+                    <input id="information" type="hidden" name="information" value='' />
+                    <div class="tableChosse ">
+                        <c:set var="tables" value="${requestScope.tables}"/>
+                        <c:forEach var="i" items="${tables}" varStatus="count">
+                            <c:choose>
+                                <c:when test="${i.getCheck_Available() == 0}">
+                                    <button style="background-color: white;" id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}" disabled>${count.count}</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button id="${i.getTable_id()}" type="button" onclick="chooseTable(this.id)" name="${i.getCheck_Available()}" value="${i.getTable_id()}">${count.count}</button>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+                        <button id="action" style="margin-left: 450px; padding: 0;" name="action" value="ChooseTable">Choose Table</button>
+                    </div>
+                </form>
+            </div>         
+        </div>
 
         <style>
             @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
             *{
                 box-sizing: border-box;
             }
-            body
+            .ChooseTable
             {
                 background-color: #FFFBF2;
                 display: flex;
@@ -118,7 +159,7 @@
                 color: white;
                 font-size: 14px;
                 margin-left: 10px;
-                padding: 10px 50px 10px 50px;
+                padding: 10px 50px 10px 50px;               
             }
             .row
             {
@@ -143,7 +184,7 @@
             {
                 background-color: #fff;
             }
-
+        
             .table:not(.occupied):hover
             {
                 cursor: pointer;
@@ -174,7 +215,7 @@
             .showcase li small {
                 margin-left: 10px;
             }
-            .container
+            .tableChosse
             {
                 margin: auto;
                 width: 55%;
@@ -220,6 +261,20 @@
         </style>
 
         <script src="js/TableJS.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
     </body>
 </html>

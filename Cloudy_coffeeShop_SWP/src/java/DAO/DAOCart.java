@@ -119,7 +119,7 @@ public class DAOCart {
 
     public static int getTotalPrice(int user_id) {
         DBConnection db = DBConnection.getInstance();
-        String sqlQuery = "SELECT SUM(amount * price) FROM Drink INNER JOIN Carts ON Drink.drink_id = Carts.drink_id AND Carts.userId = ?;";
+        String sqlQuery = "SELECT SUM(amount * price) FROM Drink INNER JOIN Carts ON Drink.drink_id = Carts.drink_id AND Carts.userId = ? AND checkout = 'false';";
         int total = 0;
         try {
             Connection connect = db.getConnection();

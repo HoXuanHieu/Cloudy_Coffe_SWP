@@ -18,66 +18,66 @@
                 padding: 5px;
             }
         </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     </head>
     <body>
-        <div align="center">
-            <h1>Please Review Before Paying</h1>
-            <form action="execute_payment" method="POST">
-                <table>
-                    <tr>
-                        <td colspan="2"><b>Transaction Details:</b></td>
-                        <td>
+        <div class="card">
+            <div class="card-body mx-4">
+                <div class="container">
+                    <p class="my-5 mx-5" style="font-size: 30px;">Please Review Before Paying</p>
+                    <div class="row">
+                        <ul class="list-unstyled">
+                            <li class="text-black mt-1">Email: ${payer.email}</li>
+                            <!--<li class="text-muted mt-1"><span class="text-black">Invoice</span> #12345</li>-->
+                            <li class="text-black mt-1">Description: ${transaction.description}</li>
+                            <li class="text-black mt-1">Name: ${payer.lastName}</li>
+                            <li class="text-black mt-1">Shipping Address: ${sessionScope.address}</li>
+                            <li class="text-black mt-1"></li>
+
+                        </ul>
+                        <hr>
+                        <div class="col-xl-10">
+                            <p>Item Total:</p>
+                        </div>
+                        <div class="col-xl-2">
+                            <p class="float-end">$ ${transaction.amount.details.subtotal}
+                            </p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <p>Shipping</p>
+                        </div>
+                        <div class="col-xl-2">
+                            <p class="float-end">$${transaction.amount.details.shipping}
+                            </p>
+                        </div>
+                        <hr style="border: 2px solid black;">
+                    </div>
+                    <div class="row text-black">
+
+                        <div class="col-xl-12">
+                            <p class="float-end fw-bold">Total: $${transaction.amount.total}
+                            </p>
+                        </div>
+                        <hr style="border: 2px solid black;">
+                    </div>
+                    <form action="execute_payment" method="POST">
+                        <div class="text-center">
                             <input type="hidden" name="paymentId" value="${param.paymentId}" />
                             <input type="hidden" name="PayerID" value="${param.PayerID}" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Description:</td>
-                        <td>${transaction.description}</td>
-                    </tr>
-                    <tr>
-                        <td>Item Total:</td>
-                        <td>${transaction.amount.details.subtotal} USD</td>
-                    </tr>
-                    <tr>
-                        <td>Shipping:</td>
-                        <td>${transaction.amount.details.shipping} USD</td>
-                    </tr>
-                    <tr>
-                        <td>Total:</td>
-                        <td>${transaction.amount.total} USD</td>
-                    </tr>
-                    <tr><td><br/></td></tr>
-                    <tr>
-                        <td colspan="2"><b>Payer Information:</b></td>
-                    </tr>
-                    <tr>
-                        <td>First Name:</td>
-                        <td>${payer.firstName}</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td>${payer.lastName}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>${payer.email}</td>
-                    </tr>
-                    <tr><td><br/></td></tr>
-                    <tr>
-                        <td colspan="2"><b>Shipping Address:</b></td>
-                    </tr>
-                    <tr>
-                        <td>Address:</td>
-                        <td>${sessionScope.address}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
                             <input type="submit" value="Pay Now" />
-                        </td>
-                    </tr>    
-                </table>
-            </form>
+                        </div>
+                    </form>
+                    <div class="text-center" style="margin-top: 90px;">
+                        <a href="CartPage.jsp"><u class="text-info">Back to Carts</u></a>
+                        <p>Please check carefully before payment. </p>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </body>
 </html>
