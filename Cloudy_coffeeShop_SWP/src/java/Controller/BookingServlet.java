@@ -97,9 +97,6 @@ public class BookingServlet extends HttpServlet {
             String information = request.getParameter("information").trim();
             String[] ids = information.split(" ");
             int userId = (int) session.getAttribute("userId");
-            request.setAttribute("date", date);
-            request.setAttribute("time", time);
-            request.setAttribute("people", people);
             DAOTable.tableOrder(userId, ids, date, time);
             request.getRequestDispatcher("AuthorizePaymentServlet?action=book").forward(request, response);
         } else {

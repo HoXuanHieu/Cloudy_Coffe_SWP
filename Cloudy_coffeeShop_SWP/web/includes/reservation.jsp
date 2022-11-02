@@ -17,19 +17,22 @@
                 <div class="col-lg-6 my-5 my-lg-0">
                     <div class="p-5">
                         <div class="mb-4">
-                            <h1 class="display-3 text-primary">30% OFF</h1>
+                            <h1 class="display-4 text-primary">Cloudy Coffee</h1>
                             <h1 class="text-white">For Online Reservation</h1>
                         </div>
-                        <p class="text-white">Lorem justo clita erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea</p>
+<!--                        <p class="text-white">Lorem justo clita erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea</p>
                         <ul class="list-inline text-white m-0">
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                        </ul>
+                        </ul>-->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.863795476089!2d108.25836811442196!3d15.968487746372366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421827994aae11%3A0x60c5bf1be85ba629!2sFPT%20School%20DaNang!5e0!3m2!1sen!2s!4v1667377989483!5m2!1sen!2s" width="450" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                        <h1><br></h1>
                         <h1 class="text-white mb-4 mt-5">Book Your Table</h1>
                         <form action="" class="mb-5">
 
